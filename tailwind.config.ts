@@ -8,11 +8,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#171717",
-        paper: "#f7f4ef",
-        brass: "#b7791f",
-        cobalt: "#164e63",
-        berry: "#8a1c4a"
+        ink: "#000000",
+        paper: "#ffffff",
+        emerald: {
+          DEFAULT: "#00d084",
+          dark: "#007a4f",
+          soft: "#9fffd7"
+        }
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Arial", "sans-serif"]
