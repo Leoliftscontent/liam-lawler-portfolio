@@ -35,6 +35,10 @@ export type Project = {
   featured?: boolean;
   pageType?: "film" | "website" | "documentary" | "event" | "social" | "gallery";
   socialPosts?: SocialLink[];
+  overviewSections?: Array<{
+    title: string;
+    body: string;
+  }>;
 };
 
 export const brand = {
@@ -175,7 +179,7 @@ export const projects: Project[] = [
     title: "Still Processing",
     displayTitle: "Still Processing — Interactive Narrative Website",
     status: "Senior Capstone",
-    category: "Interactive Narrative Website",
+    category: "Interactive Media / Transmedia Storytelling",
     thumbnail: "/cinematic-production-hero.png",
     websiteEmbedUrl: "https://v0-leo-s-feed.vercel.app/",
     gallery: [],
@@ -183,23 +187,58 @@ export const projects: Project[] = [
     equipment: [],
     software: [],
     credits: [],
-    roles: [],
+    roles: [
+      "Director",
+      "Writer",
+      "Producer",
+      "Editor",
+      "Lead Actor",
+      "Interactive Experience Creator"
+    ],
     client: "SUNY Purchase Senior Capstone",
     year: "2026",
-    tags: ["Interactive Narrative Website", "Senior Capstone", "Transmedia"],
+    tags: ["Interactive Media", "Transmedia Storytelling", "Senior Capstone"],
     description:
-      "The interactive website half of Still Processing, extending the senior capstone into a connected narrative experience about identity, performance, and self-perception.",
+      "Still Processing is an interactive transmedia project exploring creator identity, burnout, and algorithmic storytelling through a fictional fitness content creator named Leo. The experience connects an original short film, social-media-style content, YouTube videos, research, and interactive pathways into one narrative world.",
+    longDescription:
+      "The interactive website and short film are two connected parts of the same senior capstone. Together, they create a transmedia narrative about identity, performance, burnout, and the pressures of platform-driven storytelling.",
     awards: [],
     externalLinks: [
       {
-        label: "Watch Project",
+        label: "Launch Interactive Experience",
         href: "https://v0-leo-s-feed.vercel.app/"
+      },
+      {
+        label: "Watch the Short Film",
+        href: "https://youtu.be/BwLoKzwATH8"
       }
     ],
     companionProjectSlug: "still-processing-film",
     companionProjectLabel: "Watch the short film",
     featured: false,
-    pageType: "website"
+    pageType: "website",
+    overviewSections: [
+      {
+        title: "Transmedia Structure",
+        body:
+          "The project connects an original short film with a live interactive website, social-media-style content, YouTube videos, research, and branching digital pathways."
+      },
+      {
+        title: "Creative Process",
+        body:
+          "The experience was built around a fictional fitness content creator named Leo, using platform-native storytelling forms to examine creator identity, burnout, and self-performance."
+      },
+      {
+        title: "Connected Short Film",
+        body:
+          "The website is designed to be experienced alongside the Still Processing short film, with each work expanding the same senior capstone narrative from a different format."
+      },
+      {
+        title: "Research and Theory",
+        body:
+          "The project explores how platforms such as TikTok and YouTube shape identity, performance, self-perception, and algorithmic storytelling."
+      }
+    ]
   },
   {
     slug: "becoming-lola",

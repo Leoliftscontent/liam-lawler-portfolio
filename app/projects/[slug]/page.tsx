@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "@/data/portfolio";
+import type { Project } from "@/data/portfolio";
 import { GalleryLightbox } from "@/components/GalleryLightbox";
 
 export function generateStaticParams() {
@@ -41,6 +42,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   addDetail("Completed", project.completed);
   addDetail("Published", project.published);
   addDetail("Runtime", project.runtime);
+
+  if (project.slug === "still-processing-website") {
+    return <InteractiveWebsitePage details={details} project={project} />;
+  }
 
   return (
     <main className="min-h-screen bg-black text-white">
@@ -219,6 +224,192 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
         ) : null}
       </section>
     </main>
+  );
+}
+
+function InteractiveWebsitePage({
+  details,
+  project
+}: {
+  details: [string, string][];
+  project: Project;
+}) {
+  const launchUrl = project.websiteEmbedUrl ?? project.externalLinks[0]?.href;
+  const shortFilmHref = `/projects/${project.companionProjectSlug}`;
+
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <section className="relative min-h-screen border-b border-white/10">
+        <Image
+          alt={`${project.title} interactive project preview`}
+          className="object-cover opacity-[0.4]"
+          fill
+          priority
+          sizes="100vw"
+          src={project.thumbnail}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0.86)_46%,rgba(0,0,0,0.42)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(0,208,132,0.28),transparent_34rem)]" />
+
+        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:px-10">
+          <nav className="flex items-center justify-between border-b border-white/10 pb-5 text-sm">
+            <Link className="font-semibold uppercase tracking-[0.18em]" href="/">
+              Liam Lawler
+            </Link>
+            <Link
+              className="text-white/64 transition hover:text-emerald"
+              href="/#projects"
+            >
+              Back to Projects
+            </Link>
+          </nav>
+
+          <div className="grid flex-1 items-end gap-10 py-14 lg:grid-cols-[0.95fr_1.05fr] lg:pb-20">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
+                {project.category}
+              </p>
+              <h1 className="mt-5 text-5xl font-semibold leading-none sm:text-7xl">
+                {project.displayTitle ?? project.title}
+              </h1>
+              <p className="mt-7 max-w-2xl text-lg leading-8 text-white/66">
+                {project.description}
+              </p>
+              <p className="mt-6 inline-flex rounded-md border border-emerald/50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                Werlinich Senior Project Award — Grant Recipient
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                {launchUrl ? (
+                  <a
+                    className="rounded-md bg-emerald px-5 py-3 text-sm font-semibold text-black transition hover:bg-white"
+                    href={launchUrl}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Launch Interactive Experience
+                  </a>
+                ) : null}
+                <Link
+                  className="rounded-md border border-white/22 px-5 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+                  href={shortFilmHref}
+                >
+                  Watch the Short Film
+                </Link>
+              </div>
+            </div>
+
+            <BrowserPreview project={project} />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div className="grid gap-5 md:grid-cols-3">
+          {details.map(([label, value]) => (
+            <div
+              className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+              key={label}
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                {label}
+              </p>
+              <p className="mt-3 text-lg text-white/76">{value}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 grid gap-5 lg:grid-cols-2">
+          <ProjectTextSection
+            body={project.longDescription ?? project.description}
+            title="Project Overview"
+          />
+          <ProjectTextSection
+            body={project.roles.join(", ")}
+            title="My Roles"
+          />
+          {project.overviewSections?.map((section) => (
+            <ProjectTextSection
+              body={section.body}
+              key={section.title}
+              title={section.title}
+            />
+          ))}
+        </div>
+
+        <div className="mt-10 rounded-lg border border-white/10 bg-white/[0.04] p-6">
+          <h2 className="text-3xl font-semibold">Connected Senior Capstone</h2>
+          <p className="mt-5 max-w-3xl leading-8 text-white/64">
+            The interactive website and short film are two connected parts of
+            the same Still Processing senior capstone. The website expands the
+            story world through interactive pathways, while the short film
+            anchors the narrative in a cinematic format.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {launchUrl ? (
+              <a
+                className="rounded-md bg-emerald px-5 py-3 text-sm font-semibold text-black transition hover:bg-white"
+                href={launchUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Launch Interactive Experience
+              </a>
+            ) : null}
+            <Link
+              className="rounded-md border border-white/22 px-5 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+              href={shortFilmHref}
+            >
+              Watch the Short Film
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function BrowserPreview({ project }: { project: Project }) {
+  return (
+    <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.06] p-3 shadow-2xl shadow-emerald/10 backdrop-blur-xl">
+      <div className="flex items-center gap-2 border-b border-white/10 px-2 pb-3">
+        <span className="h-2.5 w-2.5 rounded-full bg-white/35" />
+        <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
+        <span className="h-2.5 w-2.5 rounded-full bg-emerald" />
+        <span className="ml-3 truncate rounded-md border border-white/10 px-3 py-1 text-xs text-white/48">
+          v0-leo-s-feed.vercel.app
+        </span>
+      </div>
+      <div className="relative mt-3 aspect-[16/10] overflow-hidden rounded-md border border-white/10 bg-black">
+        <Image
+          alt={`${project.title} website preview`}
+          className="object-cover opacity-[0.72] lg:hidden"
+          fill
+          sizes="100vw"
+          src={project.thumbnail}
+        />
+        {project.websiteEmbedUrl ? (
+          <iframe
+            className="hidden h-full w-full lg:block"
+            src={project.websiteEmbedUrl}
+            title={`${project.title} live website preview`}
+          />
+        ) : null}
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent p-5 lg:hidden">
+          <p className="text-sm leading-6 text-white/70">
+            Open the live site for the full interactive experience.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProjectTextSection({ body, title }: { body: string; title: string }) {
+  return (
+    <article className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+      <h2 className="text-2xl font-semibold">{title}</h2>
+      <p className="mt-4 leading-8 text-white/64">{body}</p>
+    </article>
   );
 }
 
