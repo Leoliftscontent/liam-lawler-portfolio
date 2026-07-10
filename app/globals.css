@@ -90,6 +90,15 @@ a {
   transform: translateY(-2px);
 }
 
+.masonry-grid {
+  column-count: 1;
+  column-gap: 1rem;
+}
+
+.masonry-grid > * {
+  break-inside: avoid;
+}
+
 .animate-rise {
   animation: rise 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
@@ -111,11 +120,19 @@ a {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+
+  .masonry-grid {
+    column-count: 2;
+  }
 }
 
 @media (min-width: 1024px) {
   .section-shell {
     padding: 7.5rem 2.5rem;
+  }
+
+  .masonry-grid {
+    column-count: 3;
   }
 }
 
