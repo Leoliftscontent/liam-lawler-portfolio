@@ -25,6 +25,23 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
+  const details: [string, string][] = [];
+  const addDetail = (label: string, value?: string) => {
+    if (value) {
+      details.push([label, value]);
+    }
+  };
+
+  addDetail("Status", project.status);
+  addDetail("Category", project.category);
+  addDetail("Roles", project.roles.join(", "));
+  addDetail("Company", project.client);
+  addDetail("Dates", project.dates);
+  addDetail("Year", project.year);
+  addDetail("Completed", project.completed);
+  addDetail("Published", project.published);
+  addDetail("Runtime", project.runtime);
+
   return (
     <main className="min-h-screen bg-black text-white">
       <section className="relative border-b border-white/10">
@@ -76,16 +93,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       <section className="section-shell">
         <div className="grid gap-5 md:grid-cols-3">
-          {[
-            ["Status", project.status],
-            ["Category", project.category],
-            ["Roles", project.roles.join(", ")],
-            ["Client", project.client],
-            ["Year", project.year],
-            ["Completed", project.completed ?? "TODO: add completion date"],
-            ["Published", project.published ?? "TODO: add publication date if applicable"],
-            ["Runtime", project.runtime ?? "TODO: add runtime if applicable"]
-          ].map(([label, value]) => (
+          {details.map(([label, value]) => (
             <div
               className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
               key={label}
@@ -102,11 +110,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           <article className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
             <h2 className="text-3xl font-semibold">Project Overview</h2>
             <p className="mt-5 leading-8 text-white/64">
-              {project.longDescription ??
-                "TODO: Add a detailed project overview here: objective, concept, pre-production, production approach, post workflow, creative choices, distribution, results, and lessons learned."}
+              {project.longDescription ?? project.description}
             </p>
-            <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black/60">
-              {/* TODO: Add project.videoEmbedUrl in data/portfolio.ts for Vimeo or YouTube. */}
+            {project.videoEmbedUrl || project.websiteEmbedUrl ? (
+              <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black/60">
+                {/* TODO: Add project.videoEmbedUrl or project.websiteEmbedUrl in data/portfolio.ts when media is available. */}
               {project.videoEmbedUrl ? (
                 <iframe
                   allow="autoplay; fullscreen; picture-in-picture"
@@ -121,12 +129,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                   src={project.websiteEmbedUrl}
                   title={`${project.title} interactive website`}
                 />
-              ) : (
-                <div className="flex h-full items-center justify-center p-8 text-center text-white/48">
-                  TODO: Embedded Vimeo or YouTube player
-                </div>
-              )}
-            </div>
+              ) : null}
+              </div>
+            ) : null}
             {project.companionProjectSlug ? (
               <Link
                 className="mt-5 inline-flex rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
@@ -151,8 +156,6 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <h2 className="text-3xl font-semibold">Campaign Posts</h2>
             <p className="mt-4 max-w-3xl leading-7 text-white/58">
               Each post is part of the SUNY Purchase Admissions campaign.
-              TODO: Later, each card can become its own page with role,
-              production process, editing, planning, and strategy notes.
             </p>
             <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {project.socialPosts.map((post, index) => (
@@ -164,13 +167,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                     Post {index + 1}
                   </p>
                   <h3 className="mt-4 text-xl font-semibold">{post.label}</h3>
-                  <div className="mt-4 grid gap-2 text-sm leading-6 text-white/58">
-                    <p>TODO: my role</p>
-                    <p>TODO: production process</p>
-                    <p>TODO: editing</p>
-                    <p>TODO: planning</p>
-                    <p>TODO: strategy</p>
-                  </div>
+                  {/* TODO: Add per-post role, production process, editing, planning, and strategy details when supplied. */}
                   <a
                     className="mt-5 inline-flex rounded-md bg-emerald px-4 py-3 text-sm font-semibold text-black transition hover:bg-white"
                     href={post.href}
@@ -185,7 +182,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </div>
         ) : null}
 
-        <div className="mt-10">
+        {project.gallery.length ? (
+          <div className="mt-10">
           <h2 className="text-3xl font-semibold">Gallery</h2>
           <GalleryLightbox
             items={project.gallery.map((image, index) => ({
@@ -194,9 +192,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               category: project.category
             }))}
           />
-        </div>
+          </div>
+        ) : null}
 
-        <div className="mt-10">
+        {project.behindTheScenes.length ? (
+          <div className="mt-10">
           <h2 className="text-3xl font-semibold">Behind the Scenes</h2>
           <div className="mt-5 grid gap-5 md:grid-cols-2">
             {project.behindTheScenes.map((image, index) => (
@@ -215,7 +215,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
               </div>
             ))}
           </div>
-        </div>
+          </div>
+        ) : null}
       </section>
     </main>
   );
@@ -226,6 +227,10 @@ function ExternalLinks({
 }: {
   links: Array<{ label: string; href: string }>;
 }) {
+  if (!links.length) {
+    return null;
+  }
+
   return (
     <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
       <h2 className="text-xl font-semibold">External Links</h2>
@@ -247,6 +252,10 @@ function ExternalLinks({
 }
 
 function DetailList({ title, items }: { title: string; items: string[] }) {
+  if (!items.length) {
+    return null;
+  }
+
   return (
     <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
       <h2 className="text-xl font-semibold">{title}</h2>

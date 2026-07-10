@@ -2,18 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import {
-  aboutBlocks,
+  aboutCopy,
   awards,
   brand,
   clients,
+  education,
   experience,
   galleryItems,
-  heroStats,
   navItems,
   projects,
-  skillGroups,
-  specializations,
-  testimonials
+  skillGroups
 } from "@/data/portfolio";
 import { GalleryLightbox } from "./GalleryLightbox";
 
@@ -122,9 +120,9 @@ export function HeroSection() {
           </div>
           <a
             className="rounded-md border border-white/18 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/82 transition duration-300 hover:border-emerald hover:text-emerald"
-            href={brand.resumeHref}
+            href="#contact"
           >
-            Resume
+            Contact
           </a>
         </nav>
 
@@ -134,83 +132,35 @@ export function HeroSection() {
               {brand.title}
             </p>
             <h1 className="text-balance text-5xl font-semibold leading-[0.96] sm:text-7xl lg:text-8xl">
-              Liam Lawler makes films, edits stories, produces sets, and creates
-              content built for the screen.
+              {brand.heroCopy}
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68">
-              TODO: Replace this paragraph with your personal brand statement:
-              the kinds of stories you tell, the tone of your work, and the
-              audiences or collaborators you want to reach.
+              {brand.heroSupport}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <ActionLink href={brand.showreelHref}>
-                Featured Showreel
+                View Featured Work
               </ActionLink>
-              <ActionLink download href={brand.resumeHref} variant="secondary">
-                Download Resume
-              </ActionLink>
-            </div>
-            <div className="mt-7 flex flex-wrap gap-4 text-sm text-white/58">
-              {brand.socials.map((social) => (
-                <a
-                  className="transition hover:text-emerald"
-                  href={social.href}
-                  key={social.label}
-                >
-                  {social.label}
-                </a>
-              ))}
+              {brand.resumeHref ? (
+                <ActionLink download href={brand.resumeHref} variant="secondary">
+                  Download Resume
+                </ActionLink>
+              ) : null}
             </div>
           </div>
 
-          <div className="animate-rise grid gap-4 [animation-delay:240ms]">
-            <div className="rounded-lg border border-white/10 bg-white/[0.06] p-4 backdrop-blur-xl">
-              <div className="relative flex aspect-[4/5] items-center justify-center overflow-hidden rounded-md border border-white/10 bg-black/45">
-                {/* TODO: Add a professional portrait to public/ and set brand.portraitSrc in data/portfolio.ts. */}
-                {brand.portraitSrc ? (
-                  <Image
-                    alt="Portrait of Liam Lawler"
-                    className="object-cover"
-                    fill
-                    sizes="(min-width: 1024px) 38vw, 100vw"
-                    src={brand.portraitSrc}
-                  />
-                ) : (
-                  <div className="p-8 text-center">
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
-                      Portrait Slot
-                    </p>
-                    <p className="mt-4 text-sm leading-6 text-white/54">
-                      TODO: Add professional portrait or on-set image.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="rounded-lg border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl">
-              {/* TODO: Add a Vimeo or YouTube embed URL to brand.demoReelEmbedUrl. */}
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
-                Demo Reel
-              </p>
-              <p className="mt-3 leading-6 text-white/58">
-                TODO: Embed your reel here when the final cut is ready.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-              {heroStats.map((item) => (
-                <div
-                  className="rounded-lg border border-white/10 bg-white/[0.06] p-5 backdrop-blur-xl"
-                  key={item.label}
-                >
-                  <p className="text-3xl font-semibold text-white">
-                    {item.value}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-white/58">
-                    {item.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+          <div className="animate-rise rounded-lg border border-white/10 bg-white/[0.06] p-6 backdrop-blur-xl [animation-delay:240ms]">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
+              Creative Portfolio
+            </p>
+            <p className="mt-4 text-2xl font-semibold leading-tight">
+              Narrative films, documentary work, event coverage, and social-first
+              content.
+            </p>
+            <p className="mt-4 leading-7 text-white/58">
+              Explore selected projects, production details, and connected
+              project pages below.
+            </p>
           </div>
         </div>
       </div>
@@ -224,26 +174,43 @@ export function AboutSection() {
       <div className="section-kicker">About</div>
       <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
         <h2 className="section-title">
-          A personal story space for the filmmaker behind the frame.
+          Cinematic storytelling across film, live events, and digital media.
         </h2>
-        <div className="grid gap-4">
-          {aboutBlocks.map((block) => (
-            <article
-              className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
-              key={block.title}
-            >
-              <h3 className="text-xl font-semibold">{block.title}</h3>
-              <p className="mt-3 leading-7 text-white/62">{block.body}</p>
-            </article>
+        <div className="grid gap-5">
+          {aboutCopy.map((paragraph) => (
+            <p className="text-lg leading-8 text-white/66" key={paragraph}>
+              {paragraph}
+            </p>
           ))}
-          <div className="mt-2 flex flex-wrap gap-2">
-            {specializations.map((item) => (
-              <span className="skill-pill" key={item}>
-                {item}
-              </span>
-            ))}
-          </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function EducationSection() {
+  return (
+    <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+      <SectionHeading
+        kicker="Education"
+        title="Academic foundation in media studies and film."
+      />
+      <div className="grid gap-4 md:grid-cols-2">
+        {education.map((item) => (
+          <article
+            className="rounded-lg border border-white/10 bg-black p-6"
+            key={item.school}
+          >
+            <h3 className="text-2xl font-semibold">{item.school}</h3>
+            <div className="mt-5 grid gap-2 leading-7 text-white/64">
+              <p>{item.degree}</p>
+              <p>{item.minor}</p>
+              <p>{item.graduated}</p>
+              <p>{item.gpa}</p>
+              <p>{item.honor}</p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );
@@ -251,19 +218,15 @@ export function AboutSection() {
 
 export function ExperienceSection() {
   return (
-    <section
-      id="experience"
-      className="section-shell border-y border-white/10 bg-white/[0.03]"
-    >
+    <section id="experience" className="section-shell">
       <SectionHeading
-        kicker="Experience"
-        title="A timeline ready for real roles, credits, and career chapters."
-        copy="TODO: Fill each timeline item with dates, responsibilities, links, and outcomes."
+        kicker="Professional Experience"
+        title="Production, social media, and festival coordination experience."
       />
       <div className="grid gap-5">
         {experience.map((item, index) => (
           <article
-            className="group grid gap-5 rounded-lg border border-white/10 bg-black p-6 transition duration-300 hover:border-emerald/60 md:grid-cols-[0.28fr_0.72fr]"
+            className="group grid gap-5 rounded-lg border border-white/10 bg-white/[0.04] p-6 transition duration-300 hover:border-emerald/60 md:grid-cols-[0.28fr_0.72fr]"
             key={`${item.title}-${item.organization}`}
           >
             <div>
@@ -277,9 +240,11 @@ export function ExperienceSection() {
               <p className="mt-1 text-sm uppercase tracking-[0.16em] text-white/42">
                 {item.organization}
               </p>
-              <p className="mt-5 max-w-3xl leading-7 text-white/64">
-                {item.detail}
-              </p>
+              <ul className="mt-5 grid gap-3 leading-7 text-white/64">
+                {item.bullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
             </div>
           </article>
         ))}
@@ -293,8 +258,7 @@ export function ProjectsSection() {
     <section id="projects" className="section-shell">
       <SectionHeading
         kicker="Featured Projects"
-        title="Featured work across narrative film, documentary, event coverage, social media, and production."
-        copy="Each project opens into a dedicated page with production details, media, credits, equipment, and TODO areas for future context."
+        title="Featured work across narrative film, documentary, events, and social media."
       />
       <div className="grid gap-5 lg:grid-cols-3">
         {featuredProjects.map((project) => (
@@ -331,9 +295,10 @@ export function ProjectsSection() {
                 {project.description}
               </span>
               <span className="mt-6 grid gap-2 text-sm text-white/50">
-                <span>Roles: {project.roles.join(", ")}</span>
-                <span>Client: {project.client}</span>
-                <span>Year: {project.year}</span>
+                {project.roles.length ? (
+                  <span>Roles: {project.roles.join(", ")}</span>
+                ) : null}
+                <span>{project.year}</span>
               </span>
               <span className="mt-7 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
@@ -343,10 +308,32 @@ export function ProjectsSection() {
                 ))}
               </span>
               <span className="mt-7 inline-flex rounded-md bg-emerald px-4 py-3 text-sm font-semibold text-black transition group-hover:bg-white">
-                Watch Project
+                {project.statusBadge ?? "Watch Project"}
               </span>
             </span>
           </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function AwardsSection() {
+  return (
+    <section className="section-shell border-y border-white/10 bg-white text-black">
+      <SectionHeading
+        dark
+        kicker="Awards & Honors"
+        title="Recognition and academic honors."
+      />
+      <div className="grid gap-3 md:grid-cols-2">
+        {awards.map((award) => (
+          <div
+            className="rounded-lg border border-black/10 p-5 text-base font-medium"
+            key={award}
+          >
+            {award}
+          </div>
         ))}
       </div>
     </section>
@@ -358,10 +345,9 @@ export function SkillsSection() {
     <section className="section-shell">
       <SectionHeading
         kicker="Technical Skills"
-        title="A categorized skill system for production, post, social, and creative direction."
-        copy="TODO: Replace these with tools and skills you can confidently discuss in an interview."
+        title="Confirmed software, production, and equipment experience."
       />
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {skillGroups.map((group) => (
           <article
             className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
@@ -382,43 +368,16 @@ export function SkillsSection() {
   );
 }
 
-export function AwardsSection() {
-  return (
-    <section className="section-shell border-y border-white/10 bg-white text-black">
-      <SectionHeading
-        dark
-        kicker="Awards & Honors"
-        title="A reusable recognition list without invented accomplishments."
-        copy="TODO: Add awards, honors, screenings, grants, press mentions, or remove this section until ready."
-      />
-      <div className="grid gap-3 md:grid-cols-2">
-        {awards.map((award) => (
-          <article
-            className="rounded-lg border border-black/10 p-5"
-            key={`${award.title}-${award.organization}`}
-          >
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-dark">
-              {award.year}
-            </p>
-            <h3 className="mt-4 text-xl font-semibold">{award.title}</h3>
-            <p className="mt-2 text-sm font-medium text-black/54">
-              {award.organization}
-            </p>
-            <p className="mt-4 leading-7 text-black/62">{award.detail}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function GallerySection() {
+  if (!galleryItems.length) {
+    return null;
+  }
+
   return (
     <section id="gallery" className="section-shell">
       <SectionHeading
         kicker="Behind-the-Scenes Gallery"
-        title="A visual archive for set photography, production stills, and process."
-        copy="TODO: Replace the repeated placeholder asset with real BTS photos and categories."
+        title="Production photography and on-set process."
       />
       <GalleryLightbox items={galleryItems} />
     </section>
@@ -431,10 +390,9 @@ export function ClientsSection() {
       <SectionHeading
         dark
         kicker="Clients & Organizations"
-        title="A clean logo wall for collaborators and organizations."
-        copy="TODO: Replace text names with logo images when brand assets are available."
+        title="Organizations connected to Liam's creative and production work."
       />
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {clients.map((client) => (
           <div
             className="rounded-lg border border-black/12 bg-black/[0.05] p-5 text-sm font-semibold uppercase tracking-[0.12em]"
@@ -448,61 +406,31 @@ export function ClientsSection() {
   );
 }
 
-export function TestimonialsSection() {
-  return (
-    <section className="section-shell">
-      <SectionHeading
-        kicker="Testimonials"
-        title="Elegant quote cards for collaborators, clients, professors, and producers."
-        copy="TODO: Add real quotes only after receiving permission to publish them."
-      />
-      <div className="grid gap-5 md:grid-cols-2">
-        {testimonials.map((testimonial) => (
-          <figure
-            className="rounded-lg border border-white/10 bg-white/[0.045] p-6"
-            key={`${testimonial.name}-${testimonial.role}`}
-          >
-            <blockquote className="text-xl leading-8 text-white/76">
-              &quot;{testimonial.quote}&quot;
-            </blockquote>
-            <figcaption className="mt-7 text-sm text-white/48">
-              <span className="font-semibold text-emerald">
-                {testimonial.name}
-              </span>
-              <br />
-              {testimonial.role}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function ResumeSection() {
   return (
-    <section className="section-shell">
+    <section id="resume" className="section-shell">
       <div className="relative overflow-hidden rounded-lg border border-white/10 bg-white/[0.045] p-6 sm:p-8 lg:p-10">
         <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-[linear-gradient(90deg,transparent,rgba(0,208,132,0.15))] lg:block" />
         <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <div className="section-kicker">Resume Download</div>
+            <div className="section-kicker">Resume</div>
             <h2 className="text-3xl font-semibold sm:text-4xl">
-              Download Liam&apos;s resume.
+              Resume download
             </h2>
             <p className="mt-4 max-w-2xl leading-7 text-white/62">
-              TODO: Replace the current placeholder PDF in public/ with your
-              final resume file, keeping the same filename or updating
-              brand.resumeHref.
+              A downloadable resume will be available here once the final PDF is
+              added.
             </p>
           </div>
-          <a
-            className="rounded-md bg-white px-6 py-4 text-sm font-semibold text-black transition duration-300 hover:bg-emerald"
-            download
-            href={brand.resumeHref}
-          >
-            Download PDF
-          </a>
+          {brand.resumeHref ? (
+            <a
+              className="rounded-md bg-white px-6 py-4 text-sm font-semibold text-black transition duration-300 hover:bg-emerald"
+              download
+              href={brand.resumeHref}
+            >
+              Download Resume
+            </a>
+          ) : null}
         </div>
       </div>
     </section>
@@ -510,11 +438,7 @@ export function ResumeSection() {
 }
 
 export function ContactSection() {
-  const contactLinks = [
-    { label: `Email: ${brand.email}`, href: brand.emailHref },
-    ...brand.socials,
-    { label: "Download Resume", href: brand.resumeHref }
-  ];
+  const contactLinks = brand.socials;
 
   return (
     <footer id="contact" className="border-t border-white/10 bg-black">
@@ -525,17 +449,20 @@ export function ContactSection() {
             Let&apos;s shape the next frame.
           </h2>
           <p className="mt-5 max-w-2xl leading-7 text-white/58">
-            TODO: Add a direct, personal invitation for collaborators, agencies,
-            producers, brands, and creative teams to reach out.
+            For production, editing, event coverage, social media, and creative
+            media opportunities, connect with Liam through the available
+            professional links.
           </p>
         </div>
-        <div className="flex flex-col gap-3 self-end">
-          {contactLinks.map((link) => (
-            <a className="contact-link" href={link.href} key={link.label}>
-              {link.label}
-            </a>
-          ))}
-        </div>
+        {contactLinks.length ? (
+          <div className="flex flex-col gap-3 self-end">
+            {contactLinks.map((link) => (
+              <a className="contact-link" href={link.href} key={link.label}>
+                {link.label}
+              </a>
+            ))}
+          </div>
+        ) : null}
       </div>
     </footer>
   );

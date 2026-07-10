@@ -3,13 +3,13 @@ import {
   AwardsSection,
   ClientsSection,
   ContactSection,
+  EducationSection,
   ExperienceSection,
   GallerySection,
   HeroSection,
   ProjectsSection,
   ResumeSection,
-  SkillsSection,
-  TestimonialsSection
+  SkillsSection
 } from "@/components/PortfolioSections";
 
 export default function Home() {
@@ -17,13 +17,13 @@ export default function Home() {
     <main className="overflow-hidden bg-black text-white">
       <HeroSection />
       <AboutSection />
+      <EducationSection />
       <ExperienceSection />
       <ProjectsSection />
       <AwardsSection />
       <SkillsSection />
       <GallerySection />
       <ClientsSection />
-      <TestimonialsSection />
       <ResumeSection />
       <ContactSection />
     </main>
