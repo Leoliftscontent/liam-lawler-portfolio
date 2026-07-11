@@ -26,12 +26,14 @@ export type Project = {
   year: string;
   tags: string[];
   description: string;
+  cardDescription?: string;
   longDescription?: string;
   awards: string[];
   externalLinks: SocialLink[];
   companionProjectSlug?: string;
   companionProjectLabel?: string;
   statusBadge?: string;
+  ctaLabel?: string;
   featured?: boolean;
   pageType?: "film" | "website" | "documentary" | "event" | "social" | "gallery";
   socialPosts?: SocialLink[];
@@ -43,18 +45,20 @@ export type Project = {
 
 export const brand = {
   name: "Liam Lawler",
-  title: "Media Producer • Director • Video Editor • Content Creator",
-  heroCopy:
-    "Award-winning media producer, director, video editor, and content creator creating narrative films, documentaries, event coverage, and social-first content.",
-  heroSupport:
-    "Liam Lawler develops projects from concept through final delivery, combining cinematic storytelling with digital-first production across film, live events, and social media.",
-  resumeHref: "",
+  eyebrow: "LIAM LAWLER'S PORTFOLIO",
+  eyebrowDisplay: "LIAM LAWLER\u2019S PORTFOLIO",
+  roleHeading:
+    "Media Producer \u2022 Director \u2022 Video Editor \u2022 Content Creator",
+  intro:
+    "Award-winning media creator working across narrative film, documentary, live-event coverage, social media, and transmedia storytelling.",
+  resumeHref: "/liam-lawler-resume.pdf",
   showreelHref: "#projects",
   socials: [] as SocialLink[]
 };
 
 export const navItems = [
-  { label: "Creative Portfolio", href: "#projects" },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
   { label: "Resume", href: "#resume" },
   { label: "Contact", href: "#contact" }
 ];
@@ -133,6 +137,8 @@ export const projects: Project[] = [
     tags: ["Narrative Short Film", "Drama", "Music"],
     description:
       "Shattered Melody follows Marianne Sinclair, a music therapist helping a patient with retrograde amnesia reconnect with the world through music after a hit-and-run accident erased their past.",
+    cardDescription:
+      "A narrative short about memory, music therapy, and reconnection after a life-altering accident.",
     awards: [],
     externalLinks: [
       {
@@ -140,6 +146,7 @@ export const projects: Project[] = [
         href: "https://youtu.be/so_J0Z_n-kI"
       }
     ],
+    ctaLabel: "Watch Project",
     featured: true,
     pageType: "film"
   },
@@ -162,6 +169,8 @@ export const projects: Project[] = [
     tags: ["Narrative Short Film", "Senior Capstone", "Transmedia"],
     description:
       "The short film half of Still Processing, a transmedia senior capstone exploring how platforms such as TikTok and YouTube shape identity, performance, and self-perception through a connected narrative website and original short film.",
+    cardDescription:
+      "The short-film half of a senior capstone about creator identity, burnout, and platform performance.",
     awards: [],
     externalLinks: [
       {
@@ -169,6 +178,7 @@ export const projects: Project[] = [
         href: "https://youtu.be/BwLoKzwATH8"
       }
     ],
+    ctaLabel: "Watch Project",
     companionProjectSlug: "still-processing-website",
     companionProjectLabel: "Explore the interactive website",
     featured: true,
@@ -200,6 +210,8 @@ export const projects: Project[] = [
     tags: ["Interactive Media", "Transmedia Storytelling", "Senior Capstone"],
     description:
       "Still Processing is an interactive transmedia project exploring creator identity, burnout, and algorithmic storytelling through a fictional fitness content creator named Leo. The experience connects an original short film, social-media-style content, YouTube videos, research, and interactive pathways into one narrative world.",
+    cardDescription:
+      "An interactive narrative website connecting film, social-style media, research, and branching digital pathways.",
     longDescription:
       "The interactive website and short film are two connected parts of the same senior capstone. Together, they create a transmedia narrative about identity, performance, burnout, and the pressures of platform-driven storytelling.",
     awards: [],
@@ -213,6 +225,7 @@ export const projects: Project[] = [
         href: "https://youtu.be/BwLoKzwATH8"
       }
     ],
+    ctaLabel: "Launch Experience",
     companionProjectSlug: "still-processing-film",
     companionProjectLabel: "Watch the short film",
     featured: false,
@@ -261,6 +274,8 @@ export const projects: Project[] = [
     tags: ["Documentary", "Drag", "Performance"],
     description:
       "Becoming Lola is a short documentary following a transgender drag queen on the road to her electrifying performance at The Night of 1,000 Lolas.",
+    cardDescription:
+      "A short documentary following Lola on the road to a transformative drag performance.",
     awards: [],
     externalLinks: [
       {
@@ -268,6 +283,7 @@ export const projects: Project[] = [
         href: "https://youtu.be/9VCEMcf4400"
       }
     ],
+    ctaLabel: "Watch Project",
     featured: true,
     pageType: "documentary"
   },
@@ -288,9 +304,11 @@ export const projects: Project[] = [
     tags: ["Event Coverage", "Pride", "Live Performance"],
     description:
       "Professional event coverage filmed at a Wonderland-themed Pride event in New Hope, Pennsylvania, including a live performance by Kim Petras. The footage is currently being edited, and selected material was provided to a documentary team for an upcoming film about the event.",
+    cardDescription:
+      "Event coverage from a Wonderland-themed Pride event in New Hope, Pennsylvania.",
     awards: [],
     externalLinks: [],
-    statusBadge: "IN PROGRESS",
+    statusBadge: "In Progress",
     featured: true,
     pageType: "event"
   },
@@ -312,6 +330,8 @@ export const projects: Project[] = [
     tags: ["Social Media", "Instagram", "TikTok", "Admissions"],
     description:
       "A collection of short-form videos created for SUNY Purchase Admissions across Instagram and TikTok. Liam contributed to filming, editing, content planning, scheduling, and analytics.",
+    cardDescription:
+      "Short-form admissions content created for Instagram and TikTok while supporting planning and analytics.",
     awards: [],
     externalLinks: [],
     socialPosts: [
@@ -329,6 +349,7 @@ export const projects: Project[] = [
       { label: "Instagram Reel", href: "https://www.instagram.com/reel/DUognFaEg2d/?igsh=cG1mdW9uY21hOXY1" },
       { label: "Instagram Reel", href: "https://www.instagram.com/reel/DYNEmQmOgvN/?igsh=anZ1bHFmdTJjMnl3" }
     ],
+    ctaLabel: "View Campaign",
     featured: true,
     pageType: "social"
   },
@@ -350,8 +371,11 @@ export const projects: Project[] = [
     tags: ["Behind the Scenes", "Gaffing", "Lighting"],
     description:
       "Behind-the-scenes images from a selective short-film production course supporting SUNY Purchase Acting BFA showcase films. Liam worked throughout the semester as a gaffer and gained practical experience with lighting setups, bounce techniques, tube lights, grip equipment, and on-set collaboration.",
+    cardDescription:
+      "Behind-the-scenes photography and lighting work from a Spring 2025 short-film production course.",
     awards: [],
     externalLinks: [],
+    ctaLabel: "View Gallery",
     featured: true,
     pageType: "gallery"
   }

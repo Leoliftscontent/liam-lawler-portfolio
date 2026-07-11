@@ -90,7 +90,7 @@ function ActionLink({
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen border-b border-white/10">
+    <section className="relative border-b border-white/10">
       <Image
         src="/cinematic-production-hero.png"
         alt="Cinematic production equipment lit with emerald studio light"
@@ -102,12 +102,15 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0.8)_42%,rgba(0,0,0,0.24)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_18%,rgba(0,208,132,0.26),transparent_32rem)]" />
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:px-10">
-        <nav className="animate-rise flex items-center justify-between border-b border-white/10 pb-5 text-sm">
-          <a className="font-semibold uppercase tracking-[0.18em]" href="#">
-            {brand.name}
+      <div className="relative z-10 mx-auto flex min-h-[68vh] w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:min-h-[72vh] lg:px-10">
+        <nav className="animate-rise flex flex-col gap-4 border-b border-white/10 pb-5 text-sm sm:flex-row sm:items-center sm:justify-between">
+          <a
+            className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald"
+            href="#"
+          >
+            {brand.eyebrowDisplay}
           </a>
-          <div className="hidden items-center gap-6 text-white/64 md:flex">
+          <div className="flex flex-wrap items-center gap-4 text-xs text-white/64 sm:justify-end sm:gap-6 sm:text-sm">
             {navItems.map((item) => (
               <a
                 className="transition duration-300 hover:text-emerald"
@@ -118,24 +121,15 @@ export function HeroSection() {
               </a>
             ))}
           </div>
-          <a
-            className="rounded-md border border-white/18 px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/82 transition duration-300 hover:border-emerald hover:text-emerald"
-            href="#contact"
-          >
-            Contact
-          </a>
         </nav>
 
-        <div className="grid flex-1 items-end gap-10 py-12 lg:grid-cols-[1fr_0.86fr] lg:pb-20">
+        <div className="flex flex-1 items-center py-16 sm:py-20 lg:py-24">
           <div className="animate-rise max-w-4xl [animation-delay:120ms]">
-            <p className="mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-emerald">
-              {brand.title}
-            </p>
-            <h1 className="text-balance text-5xl font-semibold leading-[0.96] sm:text-7xl lg:text-8xl">
-              {brand.heroCopy}
+            <h1 className="max-w-4xl text-balance text-4xl font-semibold leading-[1.04] sm:text-5xl lg:text-6xl">
+              {brand.roleHeading}
             </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68">
-              {brand.heroSupport}
+            <p className="mt-6 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
+              {brand.intro}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <ActionLink href={brand.showreelHref}>
@@ -147,20 +141,6 @@ export function HeroSection() {
                 </ActionLink>
               ) : null}
             </div>
-          </div>
-
-          <div className="animate-rise rounded-lg border border-white/10 bg-white/[0.06] p-6 backdrop-blur-xl [animation-delay:240ms]">
-            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
-              Creative Portfolio
-            </p>
-            <p className="mt-4 text-2xl font-semibold leading-tight">
-              Narrative films, documentary work, event coverage, and social-first
-              content.
-            </p>
-            <p className="mt-4 leading-7 text-white/58">
-              Explore selected projects, production details, and connected
-              project pages below.
-            </p>
           </div>
         </div>
       </div>
@@ -174,7 +154,7 @@ export function AboutSection() {
       <div className="section-kicker">About</div>
       <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
         <h2 className="section-title">
-          Cinematic storytelling across film, live events, and digital media.
+          Media creator working across film, live events, and digital platforms.
         </h2>
         <div className="grid gap-5">
           {aboutCopy.map((paragraph) => (
@@ -193,7 +173,7 @@ export function EducationSection() {
     <section className="section-shell border-y border-white/10 bg-white/[0.03]">
       <SectionHeading
         kicker="Education"
-        title="Academic foundation in media studies and film."
+        title="Academic background in Media Studies and Film."
       />
       <div className="grid gap-4 md:grid-cols-2">
         {education.map((item) => (
@@ -221,7 +201,7 @@ export function ExperienceSection() {
     <section id="experience" className="section-shell">
       <SectionHeading
         kicker="Professional Experience"
-        title="Production, social media, and festival coordination experience."
+        title="Production, social media, and festival leadership experience."
       />
       <div className="grid gap-5">
         {experience.map((item, index) => (
@@ -258,7 +238,7 @@ export function ProjectsSection() {
     <section id="projects" className="section-shell">
       <SectionHeading
         kicker="Featured Projects"
-        title="Featured work across narrative film, documentary, events, and social media."
+        title="Selected narrative, documentary, event, social media, and transmedia work."
       />
       <div className="grid gap-5 lg:grid-cols-3">
         {featuredProjects.map((project) => (
@@ -283,7 +263,7 @@ export function ProjectsSection() {
                   {project.category}
                 </span>
                 {project.statusBadge ? (
-                  <span className="rounded-md border border-emerald/40 px-2 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-emerald">
+                  <span className="rounded-md border border-emerald/40 px-2 py-1 text-[0.65rem] font-semibold tracking-[0.08em] text-emerald">
                     {project.statusBadge}
                   </span>
                 ) : null}
@@ -292,7 +272,7 @@ export function ProjectsSection() {
                 {project.displayTitle ?? project.title}
               </span>
               <span className="mt-4 block leading-7 text-white/62">
-                {project.description}
+                {project.cardDescription ?? project.description}
               </span>
               <span className="mt-6 grid gap-2 text-sm text-white/50">
                 {project.roles.length ? (
@@ -308,7 +288,7 @@ export function ProjectsSection() {
                 ))}
               </span>
               <span className="mt-7 inline-flex rounded-md bg-emerald px-4 py-3 text-sm font-semibold text-black transition group-hover:bg-white">
-                {project.statusBadge ?? "Watch Project"}
+                {project.statusBadge ?? project.ctaLabel ?? "Watch Project"}
               </span>
             </span>
           </Link>
@@ -324,7 +304,7 @@ export function AwardsSection() {
       <SectionHeading
         dark
         kicker="Awards & Honors"
-        title="Recognition and academic honors."
+        title="Academic and creative recognition."
       />
       <div className="grid gap-3 md:grid-cols-2">
         {awards.map((award) => (
@@ -345,16 +325,16 @@ export function SkillsSection() {
     <section className="section-shell">
       <SectionHeading
         kicker="Technical Skills"
-        title="Confirmed software, production, and equipment experience."
+        title="Production, post-production, software, and equipment experience."
       />
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {skillGroups.map((group) => (
           <article
-            className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+            className="rounded-lg border border-white/10 bg-white/[0.04] p-4"
             key={group.name}
           >
             <h3 className="text-xl font-semibold">{group.name}</h3>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-4 flex flex-wrap gap-1.5">
               {group.skills.map((skill) => (
                 <span className="skill-pill" key={skill}>
                   {skill}
@@ -390,7 +370,7 @@ export function ClientsSection() {
       <SectionHeading
         dark
         kicker="Clients & Organizations"
-        title="Organizations connected to Liam's creative and production work."
+        title="Selected organizations and production partners."
       />
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {clients.map((client) => (
@@ -415,11 +395,11 @@ export function ResumeSection() {
           <div>
             <div className="section-kicker">Resume</div>
             <h2 className="text-3xl font-semibold sm:text-4xl">
-              Resume download
+              Download Liam Lawler&apos;s current resume.
             </h2>
             <p className="mt-4 max-w-2xl leading-7 text-white/62">
-              A downloadable resume will be available here once the final PDF is
-              added.
+              Keep a current copy for production, editing, videography, social
+              media, and creative media opportunities.
             </p>
           </div>
           {brand.resumeHref ? (
@@ -446,13 +426,9 @@ export function ContactSection() {
         <div>
           <div className="section-kicker">Contact</div>
           <h2 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-6xl">
-            Let&apos;s shape the next frame.
+            Available for production, editing, videography, social media, and
+            creative media opportunities.
           </h2>
-          <p className="mt-5 max-w-2xl leading-7 text-white/58">
-            For production, editing, event coverage, social media, and creative
-            media opportunities, connect with Liam through the available
-            professional links.
-          </p>
         </div>
         {contactLinks.length ? (
           <div className="flex flex-col gap-3 self-end">
