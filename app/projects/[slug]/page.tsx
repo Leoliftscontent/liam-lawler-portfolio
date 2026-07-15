@@ -4,6 +4,61 @@ import { notFound } from "next/navigation";
 import { projects } from "@/data/portfolio";
 import type { Project } from "@/data/portfolio";
 import { GalleryLightbox } from "@/components/GalleryLightbox";
+import { BecomingLolaHero } from "@/components/BecomingLolaHero";
+import {
+  ProjectImageLightbox,
+  type ProjectImage
+} from "@/components/ProjectImageLightbox";
+
+const becomingLolaHeroImages: ProjectImage[] = [
+  {
+    src: "/images/becoming-lola/hero/01-mirror-profile.jpg.PNG",
+    alt: "Lola reflected in a mirror during Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/hero/02-red-jacket.jpg.PNG",
+    alt: "Lola in a red jacket in Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/hero/03-eye-makeup.jpg.PNG",
+    alt: "Eye makeup close-up from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/hero/04-stage-performance.jpg.PNG",
+    alt: "Stage performance from Becoming Lola"
+  }
+];
+
+const becomingLolaStills: ProjectImage[] = [
+  {
+    src: "/images/becoming-lola/stills/01-foundation-bottle.jpg.PNG",
+    alt: "Foundation bottle from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/02- eyeliner-application.PNG",
+    alt: "Eyeliner application from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/03-blue-hair-gems.PNG",
+    alt: "Blue hair and gems detail from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/04-preparation closeup.PNG",
+    alt: "Preparation close-up from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/05-eyebrow-prep.PNG",
+    alt: "Eyebrow preparation from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/06-Lola-drawing.PNG",
+    alt: "Drawing of Lola from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/07-stage-performance.PNG",
+    alt: "Stage performance from Becoming Lola"
+  }
+];
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -45,6 +100,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   if (project.slug === "still-processing-website") {
     return <InteractiveWebsitePage details={details} project={project} />;
+  }
+
+  if (project.slug === "becoming-lola") {
+    return <BecomingLolaProjectPage project={project} />;
   }
 
   return (
@@ -361,6 +420,144 @@ function InteractiveWebsitePage({
             >
               Watch the Short Film
             </Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function BecomingLolaProjectPage({ project }: { project: Project }) {
+  const youtubeLink = project.externalLinks.find((link) =>
+    link.href.includes("youtu")
+  );
+  const relatedProjects = projects
+    .filter((item) => item.slug !== project.slug)
+    .filter((item) => item.featured)
+    .slice(0, 3);
+  const productionDetails = [
+    ["Title", project.title],
+    ["Category", project.category],
+    ["Production", "Filmed in Fall 2024"],
+    ["Published", project.published],
+    ["Runtime", project.runtime],
+    ["Roles", project.roles.join(", ")],
+    ["Equipment", project.equipment.join(", ")]
+  ].filter((detail): detail is [string, string] => Boolean(detail[1]));
+
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <BecomingLolaHero images={becomingLolaHeroImages} />
+
+      <section id="watch-documentary" className="section-shell">
+        <div>
+          <div className="lola-kicker">Watch Documentary</div>
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
+            <h2 className="section-title max-w-4xl">Becoming Lola</h2>
+            <p className="leading-7 text-white/58">
+              Watch the completed documentary through the embedded YouTube film.
+            </p>
+          </div>
+          <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black">
+            <iframe
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+              src={project.videoEmbedUrl}
+              title="Becoming Lola documentary"
+            />
+          </div>
+          {youtubeLink ? (
+            <a
+              className="mt-5 inline-flex rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#ff9b62] hover:text-[#ff9b62]"
+              href={youtubeLink.href}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Open on YouTube
+            </a>
+          ) : null}
+        </div>
+      </section>
+
+      <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+          <div>
+            <div className="lola-kicker">Project Overview</div>
+            <h2 className="section-title">
+              A road to performance, identity, and transformation.
+            </h2>
+          </div>
+          <p className="text-lg leading-8 text-white/66">
+            Becoming Lola is a short documentary following a transgender drag
+            queen on the road to her electrifying performance at The Night of
+            1,000 Lolas.
+          </p>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="lola-kicker">Roles and Equipment</div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {productionDetails.map(([label, value]) => (
+              <article
+                className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+                key={label}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff9b62]">
+                  {label}
+                </p>
+                <p className="mt-3 leading-7 text-white/74">{value}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="stills-gallery"
+        className="section-shell border-y border-white/10 bg-white/[0.03]"
+      >
+        <div>
+          <div className="lola-kicker">Stills Gallery</div>
+          <h2 className="section-title max-w-4xl">
+            Selected moments from Becoming Lola.
+          </h2>
+          <ProjectImageLightbox images={becomingLolaStills} />
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="lola-kicker">Related Projects</div>
+          <h2 className="section-title max-w-4xl">More selected work.</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {relatedProjects.map((item) => (
+              <Link
+                className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] transition duration-300 hover:-translate-y-1 hover:border-[#ff9b62]/70"
+                href={`/projects/${item.slug}`}
+                key={item.slug}
+              >
+                <span className="relative block aspect-[16/10]">
+                  <Image
+                    alt={`${item.title} project thumbnail`}
+                    className="object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    src={item.thumbnail}
+                  />
+                </span>
+                <span className="block p-5">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff9b62]">
+                    {item.category}
+                  </span>
+                  <span className="mt-3 block text-xl font-semibold">
+                    {item.displayTitle ?? item.title}
+                  </span>
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

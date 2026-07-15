@@ -56,6 +56,15 @@ a {
   text-transform: uppercase;
 }
 
+.lola-kicker {
+  margin-bottom: 1rem;
+  color: #ff9b62;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 .section-title {
   font-size: clamp(2.5rem, 6vw, 4.75rem);
   font-weight: 600;
@@ -103,6 +112,20 @@ a {
   animation: rise 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+.lola-hero-frame {
+  animation: lolaFade 28s ease-in-out infinite;
+  opacity: 0;
+  transform: scale(1.04) translate3d(0, 0, 0);
+}
+
+.lola-hero-frame:first-child {
+  opacity: 1;
+}
+
+.animate-lola-parallax {
+  animation: lolaParallax 24s ease-in-out infinite alternate;
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -112,6 +135,34 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes lolaFade {
+  0% {
+    opacity: 0;
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+
+  6%,
+  21% {
+    opacity: 1;
+  }
+
+  27%,
+  100% {
+    opacity: 0;
+    transform: scale(1.1) translate3d(1.2%, -0.8%, 0);
+  }
+}
+
+@keyframes lolaParallax {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(0, -1.2%, 0) scale(1.022);
   }
 }
 
@@ -143,5 +194,15 @@ a {
     animation-duration: 1ms !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
+  }
+
+  .lola-hero-frame {
+    animation: none !important;
+    opacity: 0;
+    transform: none;
+  }
+
+  .lola-hero-frame:first-child {
+    opacity: 1;
   }
 }
