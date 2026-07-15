@@ -7,6 +7,7 @@ export type ProjectImage = {
   src: string;
   alt: string;
   caption?: string;
+  objectPosition?: string;
 };
 
 export function ProjectImageLightbox({
@@ -57,6 +58,7 @@ export function ProjectImageLightbox({
                     : "(min-width: 768px) 33vw, 100vw"
                 }
                 src={image.src}
+                style={{ objectPosition: image.objectPosition ?? "center" }}
               />
             </span>
             {image.caption ? (

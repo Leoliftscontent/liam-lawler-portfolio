@@ -4,27 +4,116 @@ import { notFound } from "next/navigation";
 import { projects } from "@/data/portfolio";
 import type { Project } from "@/data/portfolio";
 import { GalleryLightbox } from "@/components/GalleryLightbox";
-import { BecomingLolaHero } from "@/components/BecomingLolaHero";
 import {
   ProjectImageLightbox,
   type ProjectImage
 } from "@/components/ProjectImageLightbox";
+import { SplitProjectHero } from "@/components/SplitProjectHero";
+
+const shatteredMelodyHeroImages: ProjectImage[] = [
+  {
+    src: "/images/shattered-melody/Stills/establishing marianne phillip piano.jpg",
+    alt: "Marianne and Phillip seated near a piano in Shattered Melody",
+    objectPosition: "center"
+  },
+  {
+    src: "/images/shattered-melody/Stills/Marianne at piano.jpg",
+    alt: "Marianne seated at a piano in Shattered Melody"
+  },
+  {
+    src: "/images/shattered-melody/Stills/Phillip close up.jpg",
+    alt: "Close-up of Phillip in Shattered Melody"
+  },
+  {
+    src: "/images/shattered-melody/Stills/window scene.jpg",
+    alt: "Window scene from Shattered Melody"
+  },
+  {
+    src: "/images/shattered-melody/Stills/piano hands.jpg",
+    alt: "Hands playing piano in Shattered Melody"
+  }
+];
+
+const shatteredMelodyStills: ProjectImage[] = [
+  {
+    src: "/images/shattered-melody/Stills/doorway scene.jpg",
+    alt: "Doorway scene from Shattered Melody"
+  },
+  {
+    src: "/images/shattered-melody/Stills/establishing marianne phillip piano.jpg",
+    alt: "Establishing shot of Marianne and Phillip at the piano"
+  },
+  {
+    src: "/images/shattered-melody/Stills/Marianne at piano.jpg",
+    alt: "Marianne seated at the piano"
+  },
+  {
+    src: "/images/shattered-melody/Stills/marianne closeup.jpg",
+    alt: "Close-up of Marianne"
+  },
+  {
+    src: "/images/shattered-melody/Stills/marianne phillip piano.jpg",
+    alt: "Marianne and Phillip at the piano"
+  },
+  {
+    src: "/images/shattered-melody/Stills/marianne window close up phillip.jpg",
+    alt: "Marianne near a window with Phillip"
+  },
+  {
+    src: "/images/shattered-melody/Stills/over shoulder phillip marianne alic.jpg",
+    alt: "Over-the-shoulder shot of Phillip and Marianne"
+  },
+  {
+    src: "/images/shattered-melody/Stills/Phillip close up.jpg",
+    alt: "Close-up of Phillip"
+  },
+  {
+    src: "/images/shattered-melody/Stills/Phillip with Honda.jpg",
+    alt: "Phillip standing near a Honda"
+  },
+  {
+    src: "/images/shattered-melody/Stills/piano hands.jpg",
+    alt: "Hands on piano keys"
+  },
+  {
+    src: "/images/shattered-melody/Stills/window scene.jpg",
+    alt: "Window scene from Shattered Melody"
+  }
+];
+
+const shatteredMelodyBehindTheScenes: ProjectImage[] = [
+  {
+    src: "/images/shattered-melody/behind the scenes/TSM Set.PNG",
+    alt: "Production setup for Shattered Melody",
+    caption: "Production setup"
+  },
+  {
+    src: "/images/shattered-melody/behind the scenes/liam fix marianne hair.PNG",
+    alt: "Hair adjustment between takes on Shattered Melody",
+    caption: "Hair adjustment between takes"
+  },
+  {
+    src: "/images/shattered-melody/behind the scenes/liam with slate.PNG",
+    alt: "Slate before filming Shattered Melody",
+    caption: "Slate before filming"
+  }
+];
 
 const becomingLolaHeroImages: ProjectImage[] = [
   {
-    src: "/images/becoming-lola/hero/01-mirror-profile.jpg.PNG",
+    src: "/images/becoming-lola/stills/01-mirror-profile.jpg.PNG",
     alt: "Lola reflected in a mirror during Becoming Lola"
   },
   {
-    src: "/images/becoming-lola/hero/02-red-jacket.jpg.PNG",
+    src: "/images/becoming-lola/stills/02-red-jacket.jpg.PNG",
     alt: "Lola in a red jacket in Becoming Lola"
   },
   {
-    src: "/images/becoming-lola/hero/03-eye-makeup.jpg.PNG",
+    src: "/images/becoming-lola/stills/03-eye-makeup.jpg.PNG",
     alt: "Eye makeup close-up from Becoming Lola"
   },
   {
-    src: "/images/becoming-lola/hero/04-stage-performance.jpg.PNG",
+    src: "/images/becoming-lola/stills/04-stage-performance.jpg.PNG",
     alt: "Stage performance from Becoming Lola"
   }
 ];
@@ -35,16 +124,32 @@ const becomingLolaStills: ProjectImage[] = [
     alt: "Foundation bottle from Becoming Lola"
   },
   {
+    src: "/images/becoming-lola/stills/01-mirror-profile.jpg.PNG",
+    alt: "Lola reflected in a mirror during Becoming Lola"
+  },
+  {
     src: "/images/becoming-lola/stills/02- eyeliner-application.PNG",
     alt: "Eyeliner application from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/02-red-jacket.jpg.PNG",
+    alt: "Lola in a red jacket in Becoming Lola"
   },
   {
     src: "/images/becoming-lola/stills/03-blue-hair-gems.PNG",
     alt: "Blue hair and gems detail from Becoming Lola"
   },
   {
+    src: "/images/becoming-lola/stills/03-eye-makeup.jpg.PNG",
+    alt: "Eye makeup close-up from Becoming Lola"
+  },
+  {
     src: "/images/becoming-lola/stills/04-preparation closeup.PNG",
     alt: "Preparation close-up from Becoming Lola"
+  },
+  {
+    src: "/images/becoming-lola/stills/04-stage-performance.jpg.PNG",
+    alt: "Stage performance from Becoming Lola"
   },
   {
     src: "/images/becoming-lola/stills/05-eyebrow-prep.PNG",
@@ -102,6 +207,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
     return <InteractiveWebsitePage details={details} project={project} />;
   }
 
+  if (project.slug === "shattered-melody") {
+    return <ShatteredMelodyProjectPage project={project} />;
+  }
+
   if (project.slug === "becoming-lola") {
     return <BecomingLolaProjectPage project={project} />;
   }
@@ -140,17 +249,18 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 </p>
               ) : null}
             </div>
-            <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-white/10">
-              {/* TODO: Replace with the final hero still for this project. */}
-              <Image
-                alt={`${project.title} hero image`}
-                className="object-cover"
-                fill
-                priority
-                sizes="(min-width: 1024px) 48vw, 100vw"
-                src={project.thumbnail}
-              />
-            </div>
+            {project.thumbnail ? (
+              <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-white/10">
+                <Image
+                  alt={`${project.title} hero image`}
+                  className="object-cover"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 48vw, 100vw"
+                  src={project.thumbnail}
+                />
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
@@ -427,6 +537,187 @@ function InteractiveWebsitePage({
   );
 }
 
+function ShatteredMelodyProjectPage({ project }: { project: Project }) {
+  const youtubeLink = project.externalLinks.find((link) =>
+    link.href.includes("youtu")
+  );
+  const relatedProjects = projects
+    .filter((item) => item.slug !== project.slug)
+    .filter((item) => item.featured)
+    .slice(0, 3);
+  const productionDetails = [
+    ["Title", project.title],
+    ["Category", project.category],
+    ["Completed", project.completed],
+    ["Runtime", "8 minutes 55 seconds"],
+    ["Roles", project.roles.join(", ")],
+    ["Camera", project.equipment.join(", ")],
+    ["Editing Software", project.software.join(", ")]
+  ].filter((detail): detail is [string, string] => Boolean(detail[1]));
+
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <SplitProjectHero
+        actions={[
+          { href: "#watch-film", label: "Watch Full Film" },
+          {
+            href: "#behind-the-scenes",
+            label: "Behind the Scenes",
+            variant: "secondary"
+          }
+        ]}
+        description="After a hit-and-run leaves a young man with retrograde amnesia, a music therapist uses melody to help him reconnect with the memories that may reveal what happened."
+        images={shatteredMelodyHeroImages}
+        kicker="Narrative Short Film"
+        meta="2026 • 8m 55s • Narrative Short Film"
+        roles="Writer • Director • Assistant Cinematographer • Editor"
+        title="SHATTERED MELODY"
+      />
+
+      <section id="watch-film" className="section-shell">
+        <div>
+          <div className="section-kicker">Watch Full Film</div>
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
+            <h2 className="section-title max-w-4xl">Shattered Melody</h2>
+            <p className="leading-7 text-white/58">
+              Watch the completed short film below. A YouTube link is available
+              as a secondary fallback.
+            </p>
+          </div>
+          <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black">
+            <iframe
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+              src={project.videoEmbedUrl}
+              title="Shattered Melody short film"
+            />
+          </div>
+          {youtubeLink ? (
+            <a
+              className="mt-5 inline-flex rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+              href={youtubeLink.href}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Watch on YouTube
+            </a>
+          ) : null}
+        </div>
+      </section>
+
+      <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+          <div>
+            <div className="section-kicker">Synopsis</div>
+            <h2 className="section-title">Memory, music, and reconnection.</h2>
+          </div>
+          <p className="text-lg leading-8 text-white/66">
+            Shattered Melody follows Marianne Sinclair, a music therapist
+            helping a patient with retrograde amnesia reconnect with the world
+            through music after a hit-and-run accident erased their past.
+          </p>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">Roles and Production Details</div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {productionDetails.map(([label, value]) => (
+              <article
+                className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+                key={label}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                  {label}
+                </p>
+                <p className="mt-3 leading-7 text-white/74">{value}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+        <div>
+          <div className="section-kicker">Production Stills Gallery</div>
+          <h2 className="section-title max-w-4xl">
+            Selected frames from Shattered Melody.
+          </h2>
+          <ProjectImageLightbox images={shatteredMelodyStills} variant="masonry" />
+        </div>
+      </section>
+
+      <section id="behind-the-scenes" className="section-shell">
+        <div>
+          <div className="section-kicker">Behind the Scenes</div>
+          <h2 className="section-title max-w-4xl">Behind the Scenes</h2>
+          <p className="mt-5 max-w-3xl leading-8 text-white/64">
+            Behind-the-scenes images from the production of Shattered Melody,
+            documenting the collaborative process from setup through filming.
+          </p>
+          <ProjectImageLightbox images={shatteredMelodyBehindTheScenes} />
+        </div>
+      </section>
+
+      {project.credits.length ? (
+        <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+          <div>
+            <div className="section-kicker">Credits</div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {project.credits.map((credit) => (
+                <div
+                  className="rounded-lg border border-white/10 bg-white/[0.04] p-5 text-white/70"
+                  key={credit}
+                >
+                  {credit}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">Related Projects</div>
+          <h2 className="section-title max-w-4xl">More selected work.</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {relatedProjects.map((item) => (
+              <Link
+                className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] transition duration-300 hover:-translate-y-1 hover:border-emerald/70"
+                href={`/projects/${item.slug}`}
+                key={item.slug}
+              >
+                {item.thumbnail ? (
+                  <span className="relative block aspect-[16/10]">
+                    <Image
+                      alt={`${item.title} project thumbnail`}
+                      className="object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      src={item.thumbnail}
+                    />
+                  </span>
+                ) : null}
+                <span className="block p-5">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                    {item.category}
+                  </span>
+                  <span className="mt-3 block text-xl font-semibold">
+                    {item.displayTitle ?? item.title}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function BecomingLolaProjectPage({ project }: { project: Project }) {
   const youtubeLink = project.externalLinks.find((link) =>
     link.href.includes("youtu")
@@ -447,7 +738,19 @@ function BecomingLolaProjectPage({ project }: { project: Project }) {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <BecomingLolaHero images={becomingLolaHeroImages} />
+      <SplitProjectHero
+        accent="warm"
+        actions={[
+          { href: "#watch-documentary", label: "Watch Documentary" },
+          { href: "#stills-gallery", label: "View Stills", variant: "secondary" }
+        ]}
+        description="A short documentary following a transgender drag queen on the road to her electrifying performance at The Night of 1,000 Lolas."
+        images={becomingLolaHeroImages}
+        kicker="Short Documentary"
+        meta="2024–2025 • Documentary • 10m 34s"
+        roles="Director • Cinematographer • Editor"
+        title="BECOMING LOLA"
+      />
 
       <section id="watch-documentary" className="section-shell">
         <div>
@@ -539,15 +842,17 @@ function BecomingLolaProjectPage({ project }: { project: Project }) {
                 href={`/projects/${item.slug}`}
                 key={item.slug}
               >
-                <span className="relative block aspect-[16/10]">
-                  <Image
-                    alt={`${item.title} project thumbnail`}
-                    className="object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
-                    fill
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                    src={item.thumbnail}
-                  />
-                </span>
+                {item.thumbnail ? (
+                  <span className="relative block aspect-[16/10]">
+                    <Image
+                      alt={`${item.title} project thumbnail`}
+                      className="object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      src={item.thumbnail}
+                    />
+                  </span>
+                ) : null}
                 <span className="block p-5">
                   <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff9b62]">
                     {item.category}

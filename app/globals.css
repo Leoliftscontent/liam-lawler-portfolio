@@ -112,6 +112,20 @@ a {
   animation: rise 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+.shattered-hero-frame {
+  animation: shatteredFade 42s ease-in-out infinite;
+  opacity: 0;
+  transform: scale(1.04) translate3d(0, 0, 0);
+}
+
+.shattered-hero-frame:first-child {
+  opacity: 1;
+}
+
+.animate-shattered-parallax {
+  animation: shatteredParallax 24s ease-in-out infinite alternate;
+}
+
 .lola-hero-frame {
   animation: lolaFade 28s ease-in-out infinite;
   opacity: 0;
@@ -119,6 +133,16 @@ a {
 }
 
 .lola-hero-frame:first-child {
+  opacity: 1;
+}
+
+.project-split-hero-frame {
+  animation: projectSplitHeroFade ease-in-out infinite;
+  opacity: 0;
+  transform: scale(1.02) translate3d(0, 0, 0);
+}
+
+.project-split-hero-frame:first-child {
   opacity: 1;
 }
 
@@ -135,6 +159,24 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes shatteredFade {
+  0% {
+    opacity: 0;
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+
+  4%,
+  14.5% {
+    opacity: 1;
+  }
+
+  18.5%,
+  100% {
+    opacity: 0;
+    transform: scale(1.1) translate3d(-1.2%, -0.8%, 0);
   }
 }
 
@@ -156,6 +198,24 @@ a {
   }
 }
 
+@keyframes projectSplitHeroFade {
+  0% {
+    opacity: 0;
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+
+  7%,
+  25% {
+    opacity: 1;
+  }
+
+  32%,
+  100% {
+    opacity: 0;
+    transform: scale(1.075) translate3d(-1%, -0.75%, 0);
+  }
+}
+
 @keyframes lolaParallax {
   from {
     transform: translate3d(0, 0, 0) scale(1);
@@ -163,6 +223,16 @@ a {
 
   to {
     transform: translate3d(0, -1.2%, 0) scale(1.022);
+  }
+}
+
+@keyframes shatteredParallax {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(0, -1.5%, 0) scale(1.025);
   }
 }
 
@@ -196,6 +266,16 @@ a {
     transition-duration: 1ms !important;
   }
 
+  .shattered-hero-frame {
+    animation: none !important;
+    opacity: 0;
+    transform: none;
+  }
+
+  .shattered-hero-frame:first-child {
+    opacity: 1;
+  }
+
   .lola-hero-frame {
     animation: none !important;
     opacity: 0;
@@ -203,6 +283,16 @@ a {
   }
 
   .lola-hero-frame:first-child {
+    opacity: 1;
+  }
+
+  .project-split-hero-frame {
+    animation: none !important;
+    opacity: 0;
+    transform: none;
+  }
+
+  .project-split-hero-frame:first-child {
     opacity: 1;
   }
 }

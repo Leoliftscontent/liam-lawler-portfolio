@@ -124,7 +124,7 @@ export const projects: Project[] = [
     category: "Narrative Short Film",
     completed: "May 12, 2026",
     runtime: "8 minutes 55 seconds",
-    thumbnail: "/cinematic-production-hero.png",
+    thumbnail: "/images/shattered-melody/Stills/establishing marianne phillip piano.jpg",
     videoEmbedUrl: "https://www.youtube.com/embed/so_J0Z_n-kI",
     gallery: [],
     behindTheScenes: [],
