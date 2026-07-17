@@ -281,7 +281,7 @@ export function ProjectsSection() {
                 <span>{project.year}</span>
               </span>
               <span className="mt-7 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
+                {(project.cardTags ?? project.tags).map((tag) => (
                   <span className="skill-pill" key={tag}>
                     {tag}
                   </span>

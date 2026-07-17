@@ -165,6 +165,141 @@ const becomingLolaStills: ProjectImage[] = [
   }
 ];
 
+const stillProcessingStills: ProjectImage[] = [
+  {
+    src: "/images/still-processing/stills/01-morning and coffee.PNG",
+    alt: "A phone showing Leo's fitness content beside an iced coffee and breakfast plate"
+  },
+  {
+    src: "/images/still-processing/stills/02-leo looking at phone.PNG",
+    alt: "Leo looking directly at his phone in his bedroom"
+  },
+  {
+    src: "/images/still-processing/stills/03-leo-makes-tiktok.PNG",
+    alt: "A phone screen showing Leo recording a TikTok-style video"
+  },
+  {
+    src: "/images/still-processing/stills/04-leo recording tiktok.PNG",
+    alt: "Leo seated beside a ring light while recording short-form content"
+  },
+  {
+    src: "/images/still-processing/stills/05- leo filming workout chest press.PNG",
+    alt: "Leo filming himself during a chest press workout in a gym"
+  },
+  {
+    src: "/images/still-processing/stills/06-leo stacking weights.PNG",
+    alt: "A phone filming Leo as he stacks weights in the gym"
+  },
+  {
+    src: "/images/still-processing/stills/07-leo notification.PNG",
+    alt: "Leo wearing headphones while a notification appears over his phone"
+  },
+  {
+    src: "/images/still-processing/stills/08-editing yt video.PNG",
+    alt: "Leo editing a YouTube video at his desk"
+  },
+  {
+    src: "/images/still-processing/stills/09-OTS yt edit.PNG",
+    alt: "Over-the-shoulder view of Leo editing video footage on a laptop"
+  },
+  {
+    src: "/images/still-processing/stills/10-hate comments.PNG",
+    alt: "A phone screen showing negative comments on a social media post"
+  },
+  {
+    src: "/images/still-processing/stills/11-leo CU reaction shot.PNG",
+    alt: "Extreme close-up of Leo's eyes reacting to something on screen"
+  },
+  {
+    src: "/images/still-processing/stills/12- CU hate comments.PNG",
+    alt: "Close-up of negative comments displayed on a phone screen"
+  },
+  {
+    src: "/images/still-processing/stills/13- burnout.PNG",
+    alt: "Leo sitting at his desk with his head resting on his hand"
+  },
+  {
+    src: "/images/still-processing/stills/14-video by 6pm.PNG",
+    alt: "Notebook schedule showing a video deadline"
+  },
+  {
+    src: "/images/still-processing/stills/15- notes on tiktok.PNG",
+    alt: "Leo looking at his phone beside handwritten TikTok notes"
+  },
+  {
+    src: "/images/still-processing/stills/16-tiktok inspo.PNG",
+    alt: "A phone playing a TikTok video beside handwritten content notes"
+  },
+  {
+    src: "/images/still-processing/stills/17-posting tiktok.PNG",
+    alt: "Leo's phone showing a social media posting screen"
+  },
+  {
+    src: "/images/still-processing/stills/18-recording presentation tiktok.PNG",
+    alt: "Leo holding up his phone while recording a TikTok-style clip"
+  },
+  {
+    src: "/images/still-processing/stills/19-frustrated presentation tiktok.PNG",
+    alt: "Leo hunched over in frustration while filming content"
+  },
+  {
+    src: "/images/still-processing/stills/20-leo reaction.PNG",
+    alt: "Leo reacting while holding his phone"
+  },
+  {
+    src: "/images/still-processing/stills/21-tel when someone forcing it.PNG",
+    alt: "A phone screen showing a comment about someone forcing content"
+  },
+  {
+    src: "/images/still-processing/stills/22- CU phone.PNG",
+    alt: "Close-up of Leo's phone lying face down"
+  },
+  {
+    src: "/images/still-processing/stills/23- side profile light.PNG",
+    alt: "Side profile of Leo standing near bright window light"
+  },
+  {
+    src: "/images/still-processing/stills/24- burnout yt video setup.PNG",
+    alt: "Leo seated in front of a camera for a YouTube-style video"
+  },
+  {
+    src: "/images/still-processing/stills/25- whiteboard reminder.PNG",
+    alt: "Whiteboard schedule with YouTube and TikTok reminders"
+  },
+  {
+    src: "/images/still-processing/stills/26- sideeye.PNG",
+    alt: "Close-up of Leo glancing sideways with concern"
+  },
+  {
+    src: "/images/still-processing/stills/27- shocked leo.PNG",
+    alt: "Leo looking shocked while holding his phone"
+  },
+  {
+    src: "/images/still-processing/stills/28- cu tear drop.PNG",
+    alt: "Close-up of tears in Leo's eyes"
+  },
+  {
+    src: "/images/still-processing/stills/29- overwhelmed.PNG",
+    alt: "Leo smiling tensely while looking overwhelmed"
+  },
+  {
+    src: "/images/still-processing/stills/30- frustration.PNG",
+    alt: "Leo grabbing his hair in frustration in his bedroom"
+  },
+  {
+    src: "/images/still-processing/stills/31- filming breakdown.PNG",
+    alt: "A phone camera recording Leo during a breakdown"
+  },
+  {
+    src: "/images/still-processing/stills/32- phone POV breakdown.PNG",
+    alt: "Phone point of view of Leo sitting on the floor during a breakdown"
+  },
+  {
+    src: "/images/still-processing/stills/33- watching himself cry.PNG",
+    alt: "Leo watching emotional footage of himself on his phone"
+  }
+];
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
@@ -407,26 +542,49 @@ function StillProcessingProjectPage({
   details: [string, string][];
   project: Project;
 }) {
-  const launchUrl = project.websiteEmbedUrl ?? project.externalLinks[1]?.href;
-  const filmUrl =
-    project.externalLinks.find((link) => link.href.includes("youtu"))?.href ??
-    "https://youtu.be/BwLoKzwATH8";
+  const shortFilmUrl = "https://youtu.be/BwLoKzwATH8";
+  const confessionalUrl = "https://youtu.be/Rna5V-1AlqQ";
+  const tiktokUrl = "https://www.tiktok.com/@leo.lifts";
+  const launchUrl = "https://v0-leo-s-feed.vercel.app/";
   const recognition = project.awards[0];
+  const platformCards = [
+    {
+      title: "Narrative Short Film",
+      description:
+        "The central narrative follows Leo as the pressure to maintain his online identity begins affecting his creativity, relationships, and sense of self.",
+      href: "#watch-short-film",
+      label: "Watch Short Film"
+    },
+    {
+      title: "YouTube Confessional",
+      description:
+        "A direct-to-camera video in which Leo speaks more openly about posting, burnout, authenticity, and the pressure to keep performing for an audience.",
+      href: confessionalUrl,
+      label: "Watch YouTube Video",
+      external: true
+    },
+    {
+      title: "Leo's TikTok",
+      description:
+        "A fictional creator account that presents Leo through short, polished, and fragmented performances shaped by trends, visibility, and engagement.",
+      href: tiktokUrl,
+      label: "Visit TikTok Channel",
+      external: true
+    },
+    {
+      title: "Interactive Website",
+      description:
+        "The central entry point for the project, allowing visitors to choose where they begin and experience how a different platform changes their understanding of Leo.",
+      href: launchUrl,
+      label: "Launch Interactive Experience",
+      external: true
+    }
+  ];
 
   return (
     <main className="min-h-screen bg-black text-white">
       <section className="relative border-b border-white/10">
-        <Image
-          alt="Still Processing transmedia project hero image"
-          className="object-cover opacity-[0.42]"
-          fill
-          priority
-          sizes="100vw"
-          src={project.thumbnail}
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0.84)_46%,rgba(0,0,0,0.28)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(0,208,132,0.26),transparent_34rem)]" />
-
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(0,208,132,0.2),transparent_34rem)]" />
         <div className="relative z-10 mx-auto flex min-h-[78vh] w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:px-10">
           <nav className="flex items-center justify-between border-b border-white/10 pb-5 text-sm">
             <Link className="font-semibold uppercase tracking-[0.18em]" href="/">
@@ -440,7 +598,7 @@ function StillProcessingProjectPage({
             </Link>
           </nav>
 
-          <div className="grid flex-1 items-end gap-10 py-14 lg:grid-cols-[0.92fr_1.08fr] lg:pb-20">
+          <div className="grid flex-1 items-center gap-10 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:py-20">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
                 {project.category}
@@ -459,49 +617,78 @@ function StillProcessingProjectPage({
               <div className="mt-9 flex flex-wrap gap-3">
                 <a
                   className="rounded-md bg-emerald px-5 py-3 text-sm font-semibold text-black transition hover:bg-white"
+                  href={launchUrl}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Launch Interactive Experience
+                </a>
+                <a
+                  className="rounded-md border border-white/22 px-5 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
                   href="#watch-short-film"
                 >
                   Watch Short Film
                 </a>
-                {launchUrl ? (
-                  <a
-                    className="rounded-md border border-white/22 px-5 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
-                    href={launchUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    Launch Interactive Experience
-                  </a>
-                ) : null}
               </div>
             </div>
 
-            <BrowserPreview project={project} />
+            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50">
+              <Image
+                alt="Still Processing poster image showing Leo across film, phone, and workout scenes"
+                className="object-cover"
+                fill
+                priority
+                sizes="(min-width: 1024px) 52vw, 100vw"
+                src={project.thumbnail}
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section-shell">
         <div>
-          <div className="section-kicker">The Transmedia Experience</div>
+          <div className="section-kicker">One Character, Four Platforms</div>
           <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
-            <h2 className="section-title">
-              One senior capstone, two connected experiences.
-            </h2>
+            <div>
+              <h2 className="section-title">The platform is part of the story.</h2>
+            </div>
             <div>
               <p className="text-lg leading-8 text-white/66">
                 {project.longDescription ?? project.description}
               </p>
+              <p className="mt-5 text-lg leading-8 text-white/66">
+                The short film presents a structured narrative about burnout and
+                the growing distance between Leo&apos;s online persona and private
+                life. His YouTube video uses direct address and performative
+                vulnerability to create a more intimate, parasocial connection
+                with the viewer. On TikTok, Leo&apos;s identity becomes fragmented
+                into short, carefully performed moments designed for attention
+                and engagement.
+              </p>
+              <p className="mt-5 text-lg leading-8 text-white/66">
+                Together, the platforms demonstrate the project&apos;s central
+                idea: the medium does not simply deliver the story. The medium
+                shapes its meaning.
+              </p>
               <div className="mt-8 grid gap-4 md:grid-cols-2">
-                {project.overviewSections?.map((section) => (
+                {platformCards.map((card) => (
                   <article
-                    className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
-                    key={section.title}
+                    className="flex flex-col rounded-lg border border-white/10 bg-white/[0.04] p-5"
+                    key={card.title}
                   >
-                    <h3 className="text-2xl font-semibold">{section.title}</h3>
-                    <p className="mt-4 leading-7 text-white/64">
-                      {section.body}
+                    <h3 className="text-2xl font-semibold">{card.title}</h3>
+                    <p className="mt-4 flex-1 leading-7 text-white/64">
+                      {card.description}
                     </p>
+                    <a
+                      className="mt-6 inline-flex w-fit rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+                      href={card.href}
+                      rel={card.external ? "noopener noreferrer" : undefined}
+                      target={card.external ? "_blank" : undefined}
+                    >
+                      {card.label}
+                    </a>
                   </article>
                 ))}
               </div>
@@ -515,11 +702,13 @@ function StillProcessingProjectPage({
         className="section-shell border-y border-white/10 bg-white/[0.03]"
       >
         <div>
-          <div className="section-kicker">Narrative Short Film</div>
+          <div className="section-kicker">Still Processing — Short Film</div>
           <div className="grid gap-8 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
             <h2 className="section-title max-w-4xl">Watch Short Film</h2>
             <p className="leading-7 text-white/58">
-              The film is embedded from YouTube and does not autoplay.
+              The narrative film serves as the project&apos;s central storyline,
+              following Leo as the identity he performs online becomes
+              increasingly difficult to separate from his private life.
             </p>
           </div>
           <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black">
@@ -533,12 +722,55 @@ function StillProcessingProjectPage({
           </div>
           <a
             className="mt-5 inline-flex rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
-            href={filmUrl}
+            href={shortFilmUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Open Short Film on YouTube
+          </a>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">Leo&apos;s YouTube Confessional</div>
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
+            <h2 className="section-title max-w-4xl">
+              Leo&apos;s YouTube Confessional
+            </h2>
+            <p className="leading-7 text-white/58">
+              Presented as a personal upload from Leo&apos;s own channel, the
+              video blurs the line between honest self-reflection and the
+              performance of authenticity expected from online creators.
+            </p>
+          </div>
+          <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black">
+            <iframe
+              allow="fullscreen; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+              src="https://www.youtube.com/embed/Rna5V-1AlqQ"
+              title="Leo's YouTube confessional"
+            />
+          </div>
+          <a
+            className="mt-5 inline-flex rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+            href={confessionalUrl}
             rel="noopener noreferrer"
             target="_blank"
           >
             Open on YouTube
           </a>
+        </div>
+      </section>
+
+      <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+        <div>
+          <div className="section-kicker">Film Stills</div>
+          <h2 className="section-title max-w-4xl">
+            Selected frames from the narrative short film.
+          </h2>
+          <ProjectImageLightbox images={stillProcessingStills} />
         </div>
       </section>
 

@@ -25,6 +25,7 @@ export type Project = {
   dates?: string;
   year: string;
   tags: string[];
+  cardTags?: string[];
   description: string;
   cardDescription?: string;
   longDescription?: string;
@@ -156,7 +157,7 @@ export const projects: Project[] = [
     displayTitle: "Still Processing",
     status: "Senior Capstone",
     category: "Transmedia Project",
-    thumbnail: "/cinematic-production-hero.png",
+    thumbnail: "/images/still-processing/thumbnail/still-processing-thumbnail.png",
     videoEmbedUrl: "https://www.youtube.com/embed/BwLoKzwATH8",
     websiteEmbedUrl: "https://v0-leo-s-feed.vercel.app/",
     gallery: [],
@@ -167,13 +168,21 @@ export const projects: Project[] = [
     roles: ["Director", "Writer", "Producer", "Editor", "Lead Actor"],
     client: "SUNY Purchase Senior Capstone",
     year: "2026",
-    tags: ["Transmedia", "Interactive Web", "Narrative Film"],
+    tags: [
+      "Transmedia Storytelling",
+      "Narrative Film",
+      "Interactive Media",
+      "YouTube",
+      "TikTok",
+      "Digital Identity"
+    ],
+    cardTags: ["Transmedia", "Interactive Media", "Narrative Film"],
     description:
-      "Still Processing is an award-winning senior capstone combining a narrative short film and interactive website to explore creator identity, burnout, and algorithm-driven performance.",
+      "Still Processing follows Leo, a fitness creator whose online identity begins to fracture under the pressure to remain visible, likable, and consistent. Told across film, YouTube, TikTok, and an interactive website, each platform reveals a different version of Leo and changes how his story is understood.",
     cardDescription:
-      "An award-winning senior capstone combining a narrative short film and interactive website to explore creator identity, burnout, and algorithm-driven performance.",
+      "A transmedia senior capstone following a fitness creator whose story unfolds differently across film, YouTube, TikTok, and an interactive website.",
     longDescription:
-      "Still Processing is an award-winning senior capstone combining a narrative short film with an interactive website modeled after recommendation-driven platforms. Together, the two experiences explore creator identity, burnout, parasocial performance, and the ways algorithms influence visibility, pacing, and self-presentation.",
+      "Rather than using social media only as the setting, Still Processing uses each platform as a different form of storytelling. Viewers can enter Leo's story through the short film, his personal YouTube video, his TikTok account, or the interactive website. The version of Leo they encounter changes depending on where they begin.",
     awards: ["Werlinich Senior Project Award — Grant Recipient"],
     externalLinks: [
       {
@@ -183,6 +192,14 @@ export const projects: Project[] = [
       {
         label: "Launch Interactive Experience",
         href: "https://v0-leo-s-feed.vercel.app/"
+      },
+      {
+        label: "Watch YouTube Confessional",
+        href: "https://youtu.be/Rna5V-1AlqQ"
+      },
+      {
+        label: "Visit Leo's TikTok",
+        href: "https://www.tiktok.com/@leo.lifts"
       }
     ],
     ctaLabel: "Explore Project",
@@ -194,12 +211,22 @@ export const projects: Project[] = [
       {
         title: "Short Film",
         body:
-          "A traditional narrative exploring the emotional reality behind creator burnout and algorithmic pressure."
+          "The short film presents a structured narrative about burnout and the growing distance between Leo's online persona and private life."
+      },
+      {
+        title: "YouTube Confessional",
+        body:
+          "His YouTube video uses direct address and performative vulnerability to create a more intimate, parasocial connection with the viewer."
+      },
+      {
+        title: "Leo's TikTok",
+        body:
+          "On TikTok, Leo's identity becomes fragmented into short, carefully performed moments designed for attention and engagement."
       },
       {
         title: "Interactive Website",
         body:
-          "A platform-based experience that allows visitors to explore the fictional creator Leo through film, YouTube-style content, and TikTok-style content."
+          "The website acts as the central entry point, letting visitors choose where they begin and experience how each platform changes their understanding of Leo."
       }
     ]
   },
