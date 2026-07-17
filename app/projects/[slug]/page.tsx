@@ -203,6 +203,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   addDetail("Published", project.published);
   addDetail("Runtime", project.runtime);
 
+  if (project.slug === "still-processing-film") {
+    return <StillProcessingProjectPage details={details} project={project} />;
+  }
+
   if (project.slug === "still-processing-website") {
     return <InteractiveWebsitePage details={details} project={project} />;
   }
@@ -391,6 +395,195 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           </div>
           </div>
         ) : null}
+      </section>
+    </main>
+  );
+}
+
+function StillProcessingProjectPage({
+  details,
+  project
+}: {
+  details: [string, string][];
+  project: Project;
+}) {
+  const launchUrl = project.websiteEmbedUrl ?? project.externalLinks[1]?.href;
+  const filmUrl =
+    project.externalLinks.find((link) => link.href.includes("youtu"))?.href ??
+    "https://youtu.be/BwLoKzwATH8";
+  const recognition = project.awards[0];
+
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <section className="relative border-b border-white/10">
+        <Image
+          alt="Still Processing transmedia project hero image"
+          className="object-cover opacity-[0.42]"
+          fill
+          priority
+          sizes="100vw"
+          src={project.thumbnail}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0.84)_46%,rgba(0,0,0,0.28)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(0,208,132,0.26),transparent_34rem)]" />
+
+        <div className="relative z-10 mx-auto flex min-h-[78vh] w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:px-10">
+          <nav className="flex items-center justify-between border-b border-white/10 pb-5 text-sm">
+            <Link className="font-semibold uppercase tracking-[0.18em]" href="/">
+              Liam Lawler
+            </Link>
+            <Link
+              className="text-white/64 transition hover:text-emerald"
+              href="/#projects"
+            >
+              Back to Projects
+            </Link>
+          </nav>
+
+          <div className="grid flex-1 items-end gap-10 py-14 lg:grid-cols-[0.92fr_1.08fr] lg:pb-20">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
+                {project.category}
+              </p>
+              <h1 className="mt-5 text-5xl font-semibold leading-none sm:text-7xl">
+                {project.title}
+              </h1>
+              <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68">
+                {project.description}
+              </p>
+              {recognition ? (
+                <p className="mt-6 inline-flex rounded-md border border-emerald/50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                  {recognition}
+                </p>
+              ) : null}
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a
+                  className="rounded-md bg-emerald px-5 py-3 text-sm font-semibold text-black transition hover:bg-white"
+                  href="#watch-short-film"
+                >
+                  Watch Short Film
+                </a>
+                {launchUrl ? (
+                  <a
+                    className="rounded-md border border-white/22 px-5 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+                    href={launchUrl}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Launch Interactive Experience
+                  </a>
+                ) : null}
+              </div>
+            </div>
+
+            <BrowserPreview project={project} />
+          </div>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">The Transmedia Experience</div>
+          <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+            <h2 className="section-title">
+              One senior capstone, two connected experiences.
+            </h2>
+            <div>
+              <p className="text-lg leading-8 text-white/66">
+                {project.longDescription ?? project.description}
+              </p>
+              <div className="mt-8 grid gap-4 md:grid-cols-2">
+                {project.overviewSections?.map((section) => (
+                  <article
+                    className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+                    key={section.title}
+                  >
+                    <h3 className="text-2xl font-semibold">{section.title}</h3>
+                    <p className="mt-4 leading-7 text-white/64">
+                      {section.body}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="watch-short-film"
+        className="section-shell border-y border-white/10 bg-white/[0.03]"
+      >
+        <div>
+          <div className="section-kicker">Narrative Short Film</div>
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_0.28fr] lg:items-end">
+            <h2 className="section-title max-w-4xl">Watch Short Film</h2>
+            <p className="leading-7 text-white/58">
+              The film is embedded from YouTube and does not autoplay.
+            </p>
+          </div>
+          <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black">
+            <iframe
+              allow="fullscreen; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+              src={project.videoEmbedUrl}
+              title="Still Processing short film"
+            />
+          </div>
+          <a
+            className="mt-5 inline-flex rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+            href={filmUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Open on YouTube
+          </a>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">Project Details</div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {details.map(([label, value]) => (
+              <div
+                className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+                key={label}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                  {label}
+                </p>
+                <p className="mt-3 text-lg text-white/76">{value}</p>
+              </div>
+            ))}
+            {recognition ? (
+              <div className="rounded-lg border border-white/10 bg-white/[0.04] p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                  Recognition
+                </p>
+                <p className="mt-3 text-lg text-white/76">{recognition}</p>
+              </div>
+            ) : null}
+          </div>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span className="skill-pill" key={tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+          {launchUrl ? (
+            <a
+              className="mt-8 inline-flex rounded-md bg-emerald px-5 py-3 text-sm font-semibold text-black transition hover:bg-white"
+              href={launchUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Launch Interactive Experience
+            </a>
+          ) : null}
+        </div>
       </section>
     </main>
   );

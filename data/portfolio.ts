@@ -153,11 +153,12 @@ export const projects: Project[] = [
   {
     slug: "still-processing-film",
     title: "Still Processing",
-    displayTitle: "Still Processing — Short Film",
+    displayTitle: "Still Processing",
     status: "Senior Capstone",
-    category: "Narrative Short Film",
+    category: "Transmedia Project",
     thumbnail: "/cinematic-production-hero.png",
     videoEmbedUrl: "https://www.youtube.com/embed/BwLoKzwATH8",
+    websiteEmbedUrl: "https://v0-leo-s-feed.vercel.app/",
     gallery: [],
     behindTheScenes: [],
     equipment: [],
@@ -166,23 +167,41 @@ export const projects: Project[] = [
     roles: ["Director", "Writer", "Producer", "Editor", "Lead Actor"],
     client: "SUNY Purchase Senior Capstone",
     year: "2026",
-    tags: ["Narrative Short Film", "Senior Capstone", "Transmedia"],
+    tags: ["Transmedia", "Interactive Web", "Narrative Film"],
     description:
-      "The short film half of Still Processing, a transmedia senior capstone exploring how platforms such as TikTok and YouTube shape identity, performance, and self-perception through a connected narrative website and original short film.",
+      "Still Processing is an award-winning senior capstone combining a narrative short film and interactive website to explore creator identity, burnout, and algorithm-driven performance.",
     cardDescription:
-      "The short-film half of a senior capstone about creator identity, burnout, and platform performance.",
-    awards: [],
+      "An award-winning senior capstone combining a narrative short film and interactive website to explore creator identity, burnout, and algorithm-driven performance.",
+    longDescription:
+      "Still Processing is an award-winning senior capstone combining a narrative short film with an interactive website modeled after recommendation-driven platforms. Together, the two experiences explore creator identity, burnout, parasocial performance, and the ways algorithms influence visibility, pacing, and self-presentation.",
+    awards: ["Werlinich Senior Project Award — Grant Recipient"],
     externalLinks: [
       {
-        label: "Watch Project",
+        label: "Watch Short Film",
         href: "https://youtu.be/BwLoKzwATH8"
+      },
+      {
+        label: "Launch Interactive Experience",
+        href: "https://v0-leo-s-feed.vercel.app/"
       }
     ],
-    ctaLabel: "Watch Project",
+    ctaLabel: "Explore Project",
     companionProjectSlug: "still-processing-website",
-    companionProjectLabel: "Explore the interactive website",
+    companionProjectLabel: "Launch the interactive website",
     featured: true,
-    pageType: "film"
+    pageType: "film",
+    overviewSections: [
+      {
+        title: "Short Film",
+        body:
+          "A traditional narrative exploring the emotional reality behind creator burnout and algorithmic pressure."
+      },
+      {
+        title: "Interactive Website",
+        body:
+          "A platform-based experience that allows visitors to explore the fictional creator Leo through film, YouTube-style content, and TikTok-style content."
+      }
+    ]
   },
   {
     slug: "still-processing-website",
