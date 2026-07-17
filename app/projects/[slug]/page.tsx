@@ -300,17 +300,52 @@ const stillProcessingStills: ProjectImage[] = [
   }
 ];
 
+const stillProcessingHeroImages: ProjectImage[] = [
+  {
+    src: "/images/still-processing/thumbnail/still-processing-thumbnail.png",
+    alt: "Still Processing poster image showing Leo across film, phone, and workout scenes",
+    objectPosition: "center"
+  },
+  {
+    src: "/images/still-processing/stills/08-editing yt video.PNG",
+    alt: "Leo editing a YouTube video at his desk",
+    objectPosition: "center"
+  },
+  {
+    src: "/images/still-processing/stills/24- burnout yt video setup.PNG",
+    alt: "Leo seated in front of a camera for a YouTube-style video",
+    objectPosition: "center"
+  },
+  {
+    src: "/images/still-processing/stills/30- frustration.PNG",
+    alt: "Leo grabbing his hair in frustration in his bedroom",
+    objectPosition: "center"
+  }
+];
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const project = projects.find((item) => item.slug === params.slug);
+  const title = project
+    ? `${project.displayTitle ?? project.title} | Liam Lawler`
+    : "Project | Liam Lawler";
 
   return {
-    title: project
-      ? `${project.displayTitle ?? project.title} | Liam Lawler`
-      : "Project | Liam Lawler"
+    title,
+    openGraph: project
+      ? {
+          title,
+          images: [
+            {
+              alt: `${project.displayTitle ?? project.title} thumbnail`,
+              url: `https://liam-lawler-portfolio.vercel.app${project.thumbnail}`
+            }
+          ]
+        }
+      : undefined
   };
 }
 
@@ -583,68 +618,26 @@ function StillProcessingProjectPage({
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative border-b border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(0,208,132,0.2),transparent_34rem)]" />
-        <div className="relative z-10 mx-auto flex min-h-[78vh] w-full max-w-7xl flex-col px-5 py-6 sm:px-8 lg:px-10">
-          <nav className="flex items-center justify-between border-b border-white/10 pb-5 text-sm">
-            <Link className="font-semibold uppercase tracking-[0.18em]" href="/">
-              Liam Lawler
-            </Link>
-            <Link
-              className="text-white/64 transition hover:text-emerald"
-              href="/#projects"
-            >
-              Back to Projects
-            </Link>
-          </nav>
-
-          <div className="grid flex-1 items-center gap-10 py-14 lg:grid-cols-[0.9fr_1.1fr] lg:py-20">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-emerald">
-                {project.category}
-              </p>
-              <h1 className="mt-5 text-5xl font-semibold leading-none sm:text-7xl">
-                {project.title}
-              </h1>
-              <p className="mt-7 max-w-2xl text-lg leading-8 text-white/68">
-                {project.description}
-              </p>
-              {recognition ? (
-                <p className="mt-6 inline-flex rounded-md border border-emerald/50 px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
-                  {recognition}
-                </p>
-              ) : null}
-              <div className="mt-9 flex flex-wrap gap-3">
-                <a
-                  className="rounded-md bg-emerald px-5 py-3 text-sm font-semibold text-black transition hover:bg-white"
-                  href={launchUrl}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  Launch Interactive Experience
-                </a>
-                <a
-                  className="rounded-md border border-white/22 px-5 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
-                  href="#watch-short-film"
-                >
-                  Watch Short Film
-                </a>
-              </div>
-            </div>
-
-            <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] shadow-2xl shadow-black/50">
-              <Image
-                alt="Still Processing poster image showing Leo across film, phone, and workout scenes"
-                className="object-cover"
-                fill
-                priority
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                src={project.thumbnail}
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <SplitProjectHero
+        actions={[
+          {
+            external: true,
+            href: launchUrl,
+            label: "Launch Interactive Experience"
+          },
+          {
+            href: "#watch-short-film",
+            label: "Watch Short Film",
+            variant: "secondary"
+          }
+        ]}
+        description={project.description}
+        images={stillProcessingHeroImages}
+        kicker={project.category}
+        meta={recognition}
+        roles={project.roles.join(" • ")}
+        title={project.title}
+      />
 
       <section className="section-shell">
         <div>

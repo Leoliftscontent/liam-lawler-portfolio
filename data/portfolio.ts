@@ -52,7 +52,7 @@ export const brand = {
     "Media Producer \u2022 Director \u2022 Video Editor \u2022 Content Creator",
   intro:
     "Award-winning media creator working across narrative film, documentary, live-event coverage, social media, and transmedia storytelling.",
-  resumeHref: "/liam-lawler-resume.pdf",
+  resumeHref: "/documents/liam-lawler-resume.pdf",
   showreelHref: "#projects",
   socials: [] as SocialLink[]
 };
@@ -125,7 +125,7 @@ export const projects: Project[] = [
     category: "Narrative Short Film",
     completed: "May 12, 2026",
     runtime: "8 minutes 55 seconds",
-    thumbnail: "/images/shattered-melody/Stills/establishing marianne phillip piano.jpg",
+    thumbnail: "/images/shattered-melody/thumbnail/shattered-melody-thumbnail.png",
     videoEmbedUrl: "https://www.youtube.com/embed/so_J0Z_n-kI",
     gallery: [],
     behindTheScenes: [],

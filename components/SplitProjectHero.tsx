@@ -8,6 +8,7 @@ type SplitHeroImage = ProjectImage & {
 
 type SplitProjectHeroProps = {
   actions: Array<{
+    external?: boolean;
     href: string;
     label: string;
     variant?: "primary" | "secondary";
@@ -86,6 +87,8 @@ export function SplitProjectHero({
                   }`}
                   href={action.href}
                   key={`${action.label}-${action.href}`}
+                  rel={action.external ? "noopener noreferrer" : undefined}
+                  target={action.external ? "_blank" : undefined}
                 >
                   {action.label}
                 </a>
