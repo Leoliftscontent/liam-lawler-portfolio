@@ -1,6 +1,9 @@
 export type SocialLink = {
   label: string;
   href: string;
+  thumbnail?: string;
+  thumbnailAlt?: string;
+  thumbnailObjectPosition?: string;
 };
 
 export type Project = {
@@ -365,7 +368,7 @@ export const projects: Project[] = [
     status: "Completed",
     category: "Social Media Campaign",
     dates: "January 20, 2026 - May 15, 2026",
-    thumbnail: "/cinematic-production-hero.png",
+    thumbnail: "/images/admissions-internship/thumbnail/admissions-internship-thumbnail.png",
     gallery: [],
     behindTheScenes: [],
     equipment: [],
@@ -382,19 +385,97 @@ export const projects: Project[] = [
     awards: [],
     externalLinks: [],
     socialPosts: [
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DaQqmeAJ_VS/?igsh=MXY3ZzZiczl6MHg2MQ==" },
-      { label: "Instagram Post", href: "https://www.instagram.com/p/DX62IQAjj7Q/?igsh=emYzNHRmdndqNHQ4" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DXwrPU-u8V_/?igsh=YTE4enlicjI3bGo1" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DXsD4b6CAUt/?igsh=MXUxdzNiaTBjcmhubg==" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DXh0ckjCHhy/?igsh=ZzU2bjZxajZ3YWR0" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DXFZhdwCQLo/?igsh=MTV1YTF3Y3dlbjF1aA==" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DWrnoWVCeeQ/?igsh=OHRtMXQ0MmQ3azA2" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DWoyVw2jllN/?igsh=dThyNzhwM3JvdGVp" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DWhQhp1icHe/?igsh=MXA0Y29pdTA4aGFiYg==" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DWCLnb6CjG-/?igsh=MWk1aDFmbGpnZXZ2NQ==" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DVb_cwniUby/?igsh=c3h4bWttcW5od2s2" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DUognFaEg2d/?igsh=cG1mdW9uY21hOXY1" },
-      { label: "Instagram Reel", href: "https://www.instagram.com/reel/DYNEmQmOgvN/?igsh=anZ1bHFmdTJjMnl3" }
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DaQqmeAJ_VS/?igsh=MXY3ZzZiczl6MHg2MQ==",
+        thumbnail: "/images/admissions-internship/posts/post-01.jpg",
+        thumbnailAlt: "Two SUNY Purchase students speaking to camera outside a campus building",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Post",
+        href: "https://www.instagram.com/p/DX62IQAjj7Q/?igsh=emYzNHRmdndqNHQ4",
+        thumbnail: "/images/admissions-internship/posts/post-02.png",
+        thumbnailAlt: "Graduating students posing in caps and gowns outside the Purchase College library",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DXwrPU-u8V_/?igsh=YTE4enlicjI3bGo1",
+        thumbnail: "/images/admissions-internship/posts/post-03.png",
+        thumbnailAlt: "Two students sitting outdoors on campus during a social media interview",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DXsD4b6CAUt/?igsh=MXUxdzNiaTBjcmhubg==",
+        thumbnail: "/images/admissions-internship/posts/post-04.png",
+        thumbnailAlt: "Students waving outside a Purchase College building entrance",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DXh0ckjCHhy/?igsh=ZzU2bjZxajZ3YWR0",
+        thumbnail: "/images/admissions-internship/posts/post-05.png",
+        thumbnailAlt: "Student pointing at the sky on a sunny campus walkway",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DXFZhdwCQLo/?igsh=MTV1YTF3Y3dlbjF1aA==",
+        thumbnail: "/images/admissions-internship/posts/post-06.jpg",
+        thumbnailAlt: "Afrodisiac Day performance footage with two performers on stage",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DWrnoWVCeeQ/?igsh=OHRtMXQ0MmQ3azA2",
+        thumbnail: "/images/admissions-internship/posts/post-07.png",
+        thumbnailAlt: "Two students seated indoors during a campus interview",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DWoyVw2jllN/?igsh=dThyNzhwM3JvdGVp",
+        thumbnail: "/images/admissions-internship/posts/post-08.png",
+        thumbnailAlt: "Accepted Students Day group standing outside a campus building",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DWhQhp1icHe/?igsh=MXA0Y29pdTA4aGFiYg==",
+        thumbnail: "/images/admissions-internship/posts/post-09.jpg",
+        thumbnailAlt: "Students outdoors pointing toward the camera during a campus trend video",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DWCLnb6CjG-/?igsh=MWk1aDFmbGpnZXZ2NQ==",
+        thumbnail: "/images/admissions-internship/posts/post-10.png",
+        thumbnailAlt: "Student standing indoors holding a sign that says the rumors are true",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DVb_cwniUby/?igsh=c3h4bWttcW5od2s2",
+        thumbnail: "/images/admissions-internship/posts/post-11.jpg",
+        thumbnailAlt: "Student named Marcus standing outside on a snowy campus walkway",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DUognFaEg2d/?igsh=cG1mdW9uY21hOXY1",
+        thumbnail: "/images/admissions-internship/posts/post-12.png",
+        thumbnailAlt: "Student seated inside Purchase Broadcast Studios beside an audio console",
+        thumbnailObjectPosition: "center"
+      },
+      {
+        label: "Instagram Reel",
+        href: "https://www.instagram.com/reel/DYNEmQmOgvN/?igsh=anZ1bHFmdTJjMnl3",
+        thumbnail: "/images/admissions-internship/posts/post-13.jpg",
+        thumbnailAlt: "Dining hall food clips promoting pancake madness for Purchase students",
+        thumbnailObjectPosition: "center"
+      }
     ],
     ctaLabel: "View Campaign",
     featured: true,

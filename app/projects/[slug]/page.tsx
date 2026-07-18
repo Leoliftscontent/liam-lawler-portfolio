@@ -505,26 +505,46 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
             <p className="mt-4 max-w-3xl leading-7 text-white/58">
               Each post is part of the SUNY Purchase Admissions campaign.
             </p>
-            <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {project.socialPosts.map((post, index) => (
-                <article
-                  className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+                <a
+                  aria-label={`View campaign post ${index + 1}: ${post.label}`}
+                  className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] transition duration-300 hover:-translate-y-1 hover:border-emerald/70 focus:outline-none focus:ring-2 focus:ring-emerald focus:ring-offset-2 focus:ring-offset-black"
+                  href={post.href}
                   key={`${post.label}-${post.href}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
                 >
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
-                    Post {index + 1}
-                  </p>
-                  <h3 className="mt-4 text-xl font-semibold">{post.label}</h3>
-                  {/* TODO: Add per-post role, production process, editing, planning, and strategy details when supplied. */}
-                  <a
-                    className="mt-5 inline-flex rounded-md bg-emerald px-4 py-3 text-sm font-semibold text-black transition hover:bg-white"
-                    href={post.href}
-                    rel="noreferrer"
-                    target="_blank"
-                  >
-                    Watch Project
-                  </a>
-                </article>
+                  {post.thumbnail ? (
+                    <span className="relative block aspect-[4/5] overflow-hidden bg-white/[0.03]">
+                      <Image
+                        alt={post.thumbnailAlt ?? `${post.label} thumbnail`}
+                        className="object-cover transition duration-500 group-hover:scale-105"
+                        fill
+                        sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        src={post.thumbnail}
+                        style={{
+                          objectPosition:
+                            post.thumbnailObjectPosition ?? "center"
+                        }}
+                      />
+                      <span className="absolute left-3 top-3 rounded-md border border-white/15 bg-black/70 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur">
+                        {post.label.includes("Post") ? "Post" : post.label.replace("Instagram ", "")}
+                      </span>
+                    </span>
+                  ) : null}
+                  <span className="block p-5">
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                      Post {index + 1}
+                    </span>
+                    <span className="mt-3 block text-xl font-semibold">
+                      {post.label}
+                    </span>
+                    <span className="mt-5 inline-flex rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition group-hover:border-emerald group-hover:text-emerald">
+                      View Post
+                    </span>
+                  </span>
+                </a>
               ))}
             </div>
           </div>
