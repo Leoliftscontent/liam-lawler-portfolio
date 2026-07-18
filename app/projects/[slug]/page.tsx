@@ -953,6 +953,10 @@ function StillProcessingProjectPage({
 }
 
 function ActingBfaShowcasePage({ project }: { project: Project }) {
+  const calibanDriveUrl =
+    "https://drive.google.com/file/d/1zfq3E8aQR3p2SfIlbu8LjLslwO0OueCD/view?usp=drive_link";
+  const calibanEmbedUrl =
+    "https://drive.google.com/file/d/1zfq3E8aQR3p2SfIlbu8LjLslwO0OueCD/preview";
   const relatedProjects = projects
     .filter((item) => item.slug !== project.slug)
     .filter((item) => item.featured)
@@ -1007,6 +1011,39 @@ function ActingBfaShowcasePage({ project }: { project: Project }) {
           behind-the-scenes photography during the Spring 2025 Acting BFA senior
           showcase.
         </p>
+      </section>
+
+      <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+        <div>
+          <div className="section-kicker">Watch Looking For Caliban</div>
+          <div className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr] lg:items-end">
+            <div>
+              <h2 className="section-title max-w-3xl">
+                Watch Looking For Caliban
+              </h2>
+              <p className="mt-5 max-w-2xl leading-7 text-white/66">
+                Watch the completed Acting BFA 2025 Showcase production below.
+              </p>
+            </div>
+            <a
+              className="inline-flex w-fit rounded-md border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:border-emerald hover:text-emerald"
+              href={calibanDriveUrl}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Open Video in Google Drive
+            </a>
+          </div>
+          <div className="mt-8 aspect-video overflow-hidden rounded-lg border border-white/10 bg-black shadow-2xl shadow-emerald/10">
+            <iframe
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+              src={calibanEmbedUrl}
+              title="Looking For Caliban — Acting BFA 2025 Showcase"
+            />
+          </div>
+        </div>
       </section>
 
       <section
