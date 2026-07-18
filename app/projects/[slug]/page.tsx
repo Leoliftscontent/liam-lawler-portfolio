@@ -165,6 +165,120 @@ const becomingLolaStills: ProjectImage[] = [
   }
 ];
 
+const actingBfaFeaturedImages: ProjectImage[] = [
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/featured-01-camera-setup.jpg",
+    alt: "Camera and monitor setup during the Acting BFA 2025 Showcase production",
+    caption: "Camera setup"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/featured-02-lighting-adjustment.jpg",
+    alt: "Liam adjusting a lighting setup beside a bright diffusion panel",
+    caption: "Lighting adjustment"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/featured-03-stairwell-lighting.jpg",
+    alt: "Liam working near a stairwell lighting setup on set",
+    caption: "Stairwell lighting setup"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/featured-04-purple-set.jpg",
+    alt: "Crew gathered around a purple-lit set during filming",
+    caption: "Purple-lit set"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/featured-05-crew-collaboration.jpg",
+    alt: "Crew members collaborating beside camera and purple lighting",
+    caption: "Crew collaboration"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/featured-06-costume-room.jpg",
+    alt: "Cast and crew gathered in a costume room during production",
+    caption: "Costume room setup"
+  }
+];
+
+const actingBfaGalleryImages: ProjectImage[] = [
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-01-class-group.jpg",
+    alt: "Class group photo from the Acting BFA 2025 Showcase production"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-02-camera-rig.jpg",
+    alt: "Camera rig and crew setup behind the scenes"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-03-shadow-performance.jpg",
+    alt: "Performer framed by a bright doorway during filming"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-04-performer-closeup.jpg",
+    alt: "Actor standing in patterned light during a showcase setup"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-05-stairwell-setup-wide.jpg",
+    alt: "Wide behind-the-scenes view of a stairwell lighting setup"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-06-stairwell-lighting-wide.jpg",
+    alt: "Wide view of lighting equipment near a stairwell"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-07-purple-monitor-setup.jpg",
+    alt: "Crew and monitor setup in purple light"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-08-purple-crew-setup.jpg",
+    alt: "Crew members standing near camera under purple lighting"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-09-light-adjustment.jpg",
+    alt: "Crew member adjusting a purple tube light"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-10-purple-lighting-crew.jpg",
+    alt: "Crew and lighting setup on a purple-lit set"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-11-on-set-discussion.jpg",
+    alt: "Crew gathered in discussion during a purple-lit setup"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-12-purple-performance-room.jpg",
+    alt: "Performer and crew in a room lit with purple practical lighting"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-13-overhead-lighting.jpg",
+    alt: "Overhead view of crew beneath purple light"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-14-ceiling-light-detail.jpg",
+    alt: "Ceiling-mounted lighting detail from the showcase production"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-15-vertical-lighting-setup.jpg",
+    alt: "Vertical behind-the-scenes lighting setup"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-16-purple-portrait.jpg",
+    alt: "Portrait under purple set lighting"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-17-costume-room-portrait.jpg",
+    alt: "Actor standing in a costume room between setups"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-18-mirror-room-actors.jpg",
+    alt: "Actors standing in a bright mirror room"
+  },
+  {
+    src: "/images/acting-bfa-2025-showcase/bts/gallery-19-costume-room-group.jpg",
+    alt: "Cast and crew gathered in a costume room"
+  }
+];
+
+const actingBfaHeroImages: ProjectImage[] = actingBfaFeaturedImages.slice(0, 3);
+
 const stillProcessingStills: ProjectImage[] = [
   {
     src: "/images/still-processing/stills/01-morning and coffee.PNG",
@@ -387,6 +501,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   if (project.slug === "becoming-lola") {
     return <BecomingLolaProjectPage project={project} />;
+  }
+
+  if (project.slug === "behind-the-scenes-gallery") {
+    return <ActingBfaShowcasePage project={project} />;
   }
 
   return (
@@ -828,6 +946,126 @@ function StillProcessingProjectPage({
               Launch Interactive Experience
             </a>
           ) : null}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function ActingBfaShowcasePage({ project }: { project: Project }) {
+  const relatedProjects = projects
+    .filter((item) => item.slug !== project.slug)
+    .filter((item) => item.featured)
+    .slice(0, 3);
+  const details: [string, string][] = [
+    ["Title", project.title],
+    ["Subtitle", "Looking For Caliban"],
+    ["Category", project.category],
+    ["Role", project.roles.join(", ")],
+    ["Year", project.year],
+    ["Context", "Spring 2025 Acting BFA Senior Showcase"]
+  ].filter((detail): detail is [string, string] => Boolean(detail[1]));
+
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <SplitProjectHero
+        actions={[
+          {
+            href: "#featured-bts",
+            label: "View Gallery"
+          },
+          {
+            href: "/#projects",
+            label: "Back to Projects",
+            variant: "secondary"
+          }
+        ]}
+        description="Behind-the-scenes documentation from the Spring 2025 Acting BFA senior showcase production, highlighting my work as a gaffer and the on-set process behind the project."
+        images={actingBfaHeroImages}
+        kicker="Behind-the-Scenes Photography"
+        meta="Looking For Caliban"
+        roles="Gaffer"
+        title="Acting BFA 2025 Showcase"
+      />
+
+      <section className="section-shell">
+        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {details.map(([label, value]) => (
+            <article
+              className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+              key={label}
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                {label}
+              </p>
+              <p className="mt-3 leading-7 text-white/74">{value}</p>
+            </article>
+          ))}
+        </div>
+        <p className="mt-8 max-w-3xl text-lg leading-8 text-white/66">
+          Worked as a gaffer and documented the production process through
+          behind-the-scenes photography during the Spring 2025 Acting BFA senior
+          showcase.
+        </p>
+      </section>
+
+      <section
+        id="featured-bts"
+        className="section-shell border-y border-white/10 bg-white/[0.03]"
+      >
+        <div>
+          <div className="section-kicker">Featured Behind the Scenes</div>
+          <h2 className="section-title max-w-4xl">
+            Selected behind-the-scenes moments highlighting lighting setup and
+            on-set collaboration.
+          </h2>
+          <ProjectImageLightbox images={actingBfaFeaturedImages} />
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">Behind the Scenes Gallery</div>
+          <h2 className="section-title max-w-4xl">
+            Additional production photos from the Spring 2025 showcase process.
+          </h2>
+          <ProjectImageLightbox images={actingBfaGalleryImages} variant="masonry" />
+        </div>
+      </section>
+
+      <section className="section-shell border-t border-white/10 bg-white/[0.03]">
+        <div>
+          <div className="section-kicker">Related Projects</div>
+          <h2 className="section-title max-w-4xl">More selected work.</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {relatedProjects.map((item) => (
+              <Link
+                className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] transition duration-300 hover:-translate-y-1 hover:border-emerald/70"
+                href={`/projects/${item.slug}`}
+                key={item.slug}
+              >
+                {item.thumbnail ? (
+                  <span className="relative block aspect-[16/10]">
+                    <Image
+                      alt={`${item.title} project thumbnail`}
+                      className="object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      src={item.thumbnail}
+                    />
+                  </span>
+                ) : null}
+                <span className="block p-5">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                    {item.category}
+                  </span>
+                  <span className="mt-3 block text-xl font-semibold">
+                    {item.displayTitle ?? item.title}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </main>
