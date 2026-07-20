@@ -342,10 +342,11 @@ export const projects: Project[] = [
     title: "Wonderland Event Coverage",
     status: "In Progress",
     category: "Event Coverage",
-    thumbnail: "/cinematic-production-hero.png",
+    thumbnail:
+      "/images/wonderland-event-coverage/thumbnail/wonderland-event-coverage-thumbnail.png",
     gallery: [],
     behindTheScenes: [],
-    equipment: ["Sony FX6"],
+    equipment: ["Sony FX6", "Supplemental phone coverage"],
     software: [],
     credits: [],
     roles: ["Production Assistant", "Videographer", "Editor"],
@@ -353,9 +354,9 @@ export const projects: Project[] = [
     year: "2026",
     tags: ["Event Coverage", "Pride", "Live Performance"],
     description:
-      "Professional event coverage filmed at a Wonderland-themed Pride event in New Hope, Pennsylvania, including a live performance by Kim Petras. The footage is currently being edited, and selected material was provided to a documentary team for an upcoming film about the event.",
+      "Event coverage from a Wonderland-themed Pride celebration in New Hope, Pennsylvania, including live performances, behind-the-scenes moments, guest interactions, and the atmosphere of the event.",
     cardDescription:
-      "Event coverage from a Wonderland-themed Pride event in New Hope, Pennsylvania.",
+      "Event coverage from a Wonderland-themed Pride celebration in New Hope, Pennsylvania.",
     awards: [],
     externalLinks: [],
     statusBadge: "In Progress",

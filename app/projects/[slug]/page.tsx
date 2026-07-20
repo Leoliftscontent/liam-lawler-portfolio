@@ -279,6 +279,51 @@ const actingBfaGalleryImages: ProjectImage[] = [
 
 const actingBfaHeroImages: ProjectImage[] = actingBfaFeaturedImages.slice(0, 3);
 
+const wonderlandEventStills: ProjectImage[] = [
+  {
+    src: "/images/wonderland-event-coverage/stills/01-stage-venue-lighting.jpg",
+    alt: "Wonderland-themed stage and venue lighting during event setup",
+    caption: "Stage and venue atmosphere"
+  },
+  {
+    src: "/images/wonderland-event-coverage/stills/02-production-camera-selfie.jpg",
+    alt: "Liam holding a production camera while documenting event coverage",
+    caption: "Production camera coverage"
+  },
+  {
+    src: "/images/wonderland-event-coverage/stills/03-wonderland-rabbit-decor.jpg",
+    alt: "Wonderland rabbit decor with flowers and candles",
+    caption: "Wonderland decor"
+  },
+  {
+    src: "/images/wonderland-event-coverage/stills/04-mad-here-set-decor.jpg",
+    alt: "Mad Here Wonderland-inspired set decor with props and signage",
+    caption: "Wonderland set decor"
+  },
+  {
+    src: "/images/wonderland-event-coverage/stills/05-checkerboard-stage.jpg",
+    alt: "Outdoor checkerboard stage setup for the Wonderland-themed event",
+    caption: "Event stage setup"
+  },
+  {
+    src: "/images/wonderland-event-coverage/stills/06-outdoor-wonderland-sign.jpg",
+    alt: "Outdoor group performance area beside illuminated Wonderland letters",
+    caption: "Outdoor event moment"
+  },
+  {
+    src: "/images/wonderland-event-coverage/stills/07-storybook-set-piece.jpg",
+    alt: "Outdoor storybook set piece with a checkerboard floor",
+    caption: "Storybook set piece"
+  }
+];
+
+const wonderlandHeroImages: ProjectImage[] = [
+  wonderlandEventStills[0],
+  wonderlandEventStills[4],
+  wonderlandEventStills[3],
+  wonderlandEventStills[2]
+];
+
 const stillProcessingStills: ProjectImage[] = [
   {
     src: "/images/still-processing/stills/01-morning and coffee.PNG",
@@ -505,6 +550,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
   if (project.slug === "behind-the-scenes-gallery") {
     return <ActingBfaShowcasePage project={project} />;
+  }
+
+  if (project.slug === "wonderland-event-coverage") {
+    return <WonderlandEventCoveragePage project={project} />;
   }
 
   return (
@@ -946,6 +995,166 @@ function StillProcessingProjectPage({
               Launch Interactive Experience
             </a>
           ) : null}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function WonderlandEventCoveragePage({ project }: { project: Project }) {
+  const relatedProjects = projects
+    .filter((item) => item.slug !== project.slug)
+    .filter((item) => item.featured)
+    .slice(0, 3);
+  const featuredStills = wonderlandEventStills.slice(0, 4);
+  const details: [string, string][] = [
+    ["Category", project.category],
+    ["Roles", project.roles.join(", ")],
+    ["Company", project.client],
+    ["Year", project.year],
+    ["Camera Work", project.equipment.join(", ")]
+  ].filter((detail): detail is [string, string] => Boolean(detail[1]));
+
+  return (
+    <main className="min-h-screen bg-black text-white">
+      <SplitProjectHero
+        actions={[
+          {
+            href: "#event-highlights",
+            label: "View Stills"
+          },
+          {
+            href: "/#projects",
+            label: "Back to Projects",
+            variant: "secondary"
+          }
+        ]}
+        description={project.description}
+        images={wonderlandHeroImages}
+        kicker={project.category}
+        meta="New Hope, Pennsylvania"
+        roles={project.roles.join(" • ")}
+        title={project.title}
+      />
+
+      <section className="section-shell">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_0.28fr] lg:items-start">
+          <div>
+            <div className="section-kicker">Project Overview</div>
+            <h2 className="section-title max-w-4xl">
+              Professional event coverage from a Wonderland-themed Pride
+              celebration.
+            </h2>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/66">
+              Event coverage from a Wonderland-themed Pride celebration in New
+              Hope, Pennsylvania, including live performances,
+              behind-the-scenes moments, guest interactions, and the atmosphere
+              of the event.
+            </p>
+            <p className="mt-5 max-w-3xl leading-8 text-white/58">
+              I supported the production team and captured event coverage
+              across live performances, behind-the-scenes moments, and guest
+              interactions.
+            </p>
+          </div>
+
+          <div className="grid gap-4">
+            {details.map(([label, value]) => (
+              <article
+                className="rounded-lg border border-white/10 bg-white/[0.04] p-5"
+                key={label}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                  {label}
+                </p>
+                <p className="mt-3 leading-7 text-white/74">{value}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="event-highlights"
+        className="section-shell border-y border-white/10 bg-white/[0.03]"
+      >
+        <div>
+          <div className="section-kicker">Event Highlights</div>
+          <h2 className="section-title max-w-4xl">
+            Selected frames capturing the performances, production process, and
+            Wonderland-inspired atmosphere of the event.
+          </h2>
+          <ProjectImageLightbox images={featuredStills} />
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">Full Stills Gallery</div>
+          <h2 className="section-title max-w-4xl">
+            Venue, stage, production, and decor images from the event.
+          </h2>
+          <ProjectImageLightbox images={wonderlandEventStills} variant="masonry" />
+        </div>
+      </section>
+
+      <section className="section-shell border-y border-white/10 bg-white/[0.03]">
+        <div>
+          <div className="section-kicker">Roles and Production Details</div>
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {details.map(([label, value]) => (
+              <article
+                className="rounded-lg border border-white/10 bg-black/30 p-5"
+                key={`${label}-detail`}
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                  {label}
+                </p>
+                <p className="mt-3 leading-7 text-white/74">{value}</p>
+              </article>
+            ))}
+          </div>
+          <p className="mt-8 max-w-3xl leading-8 text-white/58">
+            Web-ready video highlights can be added later from a finished
+            Google Drive, YouTube, or Vimeo export. Large raw production files
+            are not embedded directly in this portfolio page.
+          </p>
+        </div>
+      </section>
+
+      <section className="section-shell">
+        <div>
+          <div className="section-kicker">Related Projects</div>
+          <h2 className="section-title max-w-4xl">More selected work.</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {relatedProjects.map((item) => (
+              <Link
+                className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.04] transition duration-300 hover:-translate-y-1 hover:border-emerald/70"
+                href={`/projects/${item.slug}`}
+                key={item.slug}
+              >
+                {item.thumbnail ? (
+                  <span className="relative block aspect-[16/10]">
+                    <Image
+                      alt={`${item.title} project thumbnail`}
+                      className="object-cover opacity-80 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      src={item.thumbnail}
+                    />
+                  </span>
+                ) : null}
+                <span className="block p-5">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald">
+                    {item.category}
+                  </span>
+                  <span className="mt-3 block text-xl font-semibold">
+                    {item.displayTitle ?? item.title}
+                  </span>
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </main>
