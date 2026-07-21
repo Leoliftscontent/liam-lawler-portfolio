@@ -17,6 +17,26 @@ import { GalleryLightbox } from "./GalleryLightbox";
 
 const featuredProjects = projects.filter((project) => project.featured);
 
+const recognitionImages = [
+  {
+    src: "/images/recognition/01-werlinich-outstanding-senior.jpg",
+    alt: "Liam holding the Werlinich Senior Project Award and Outstanding Senior in Media Studies Award",
+    className: "md:col-span-2 md:row-span-2"
+  },
+  {
+    src: "/images/recognition/02-outstanding-junior.jpg",
+    alt: "Liam holding the Outstanding Junior in Media Studies Award"
+  },
+  {
+    src: "/images/recognition/03-graduation.jpg",
+    alt: "Liam in cap and gown holding his diploma at graduation"
+  },
+  {
+    src: "/images/recognition/04-teenys-red-carpet.jpg",
+    alt: "Liam with fellow honorees on the red carpet at the Teeny Awards"
+  }
+];
+
 function SectionHeading({
   kicker,
   title,
@@ -200,32 +220,30 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="section-shell">
       <SectionHeading
-        kicker="Professional Experience"
-        title="Production, social media, and festival leadership experience."
+        kicker="Selected Experience"
+        title="Selected Experience"
+        copy="Production, social media, and festival coordination experience."
       />
-      <div className="grid gap-5">
-        {experience.map((item, index) => (
+      <div className="grid gap-4 lg:grid-cols-3">
+        {experience.map((item) => (
           <article
-            className="group grid gap-5 rounded-lg border border-white/10 bg-white/[0.04] p-6 transition duration-300 hover:border-emerald/60 md:grid-cols-[0.28fr_0.72fr]"
+            className="rounded-lg border border-white/10 bg-white/[0.035] p-5 transition duration-300 hover:border-emerald/60"
             key={`${item.title}-${item.organization}`}
           >
-            <div>
-              <p className="text-sm font-semibold text-emerald">
-                0{index + 1}
-              </p>
-              <p className="mt-3 text-sm text-white/46">{item.period}</p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-semibold">{item.title}</h3>
-              <p className="mt-1 text-sm uppercase tracking-[0.16em] text-white/42">
-                {item.organization}
-              </p>
-              <ul className="mt-5 grid gap-3 leading-7 text-white/64">
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-            </div>
+            <p className="text-sm font-semibold text-emerald">{item.period}</p>
+            <h3 className="mt-4 text-xl font-semibold">{item.title}</h3>
+            <p className="mt-1 text-xs uppercase tracking-[0.16em] text-white/42">
+              {item.organization}
+            </p>
+            <p className="mt-5 leading-7 text-white/62">{item.bullets[0]}</p>
+            {item.link ? (
+              <Link
+                className="mt-5 inline-flex text-sm font-semibold text-emerald transition hover:text-white"
+                href={item.link.href}
+              >
+                {item.link.label}
+              </Link>
+            ) : null}
           </article>
         ))}
       </div>
@@ -303,18 +321,43 @@ export function AwardsSection() {
     <section className="section-shell border-y border-white/10 bg-white text-black">
       <SectionHeading
         dark
-        kicker="Awards & Honors"
-        title="Academic and creative recognition."
+        kicker="Recognition"
+        title="Recognition"
+        copy="Awards, honors, and milestones from my academic and creative work."
       />
-      <div className="grid gap-3 md:grid-cols-2">
-        {awards.map((award) => (
-          <div
-            className="rounded-lg border border-black/10 p-5 text-base font-medium"
-            key={award}
-          >
-            {award}
-          </div>
-        ))}
+      <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div className="grid auto-rows-[minmax(12rem,auto)] gap-3 md:grid-cols-2">
+          {recognitionImages.map((image) => (
+            <div
+              className={`relative min-h-64 overflow-hidden rounded-lg border border-black/10 bg-black/5 ${
+                image.className ?? ""
+              }`}
+              key={image.src}
+            >
+              <Image
+                alt={image.alt}
+                className="object-cover"
+                fill
+                sizes={
+                  image.className
+                    ? "(min-width: 1024px) 42vw, 100vw"
+                    : "(min-width: 1024px) 22vw, (min-width: 768px) 50vw, 100vw"
+                }
+                src={image.src}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="grid gap-3">
+          {awards.map((award) => (
+            <div
+              className="rounded-lg border border-black/10 p-5 text-base font-medium"
+              key={award}
+            >
+              {award}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -418,27 +461,30 @@ export function ResumeSection() {
 }
 
 export function ContactSection() {
-  const contactLinks = brand.socials;
-
   return (
     <footer id="contact" className="border-t border-white/10 bg-black">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1fr_auto] lg:px-10">
         <div>
           <div className="section-kicker">Contact</div>
           <h2 className="max-w-3xl text-4xl font-semibold leading-tight sm:text-6xl">
-            Available for production, editing, videography, social media, and
-            creative media opportunities.
+            Let&apos;s create something worth watching.
           </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/62">
+            I&apos;m currently seeking opportunities in production coordination,
+            videography, video editing, social media, and creative marketing.
+          </p>
         </div>
-        {contactLinks.length ? (
-          <div className="flex flex-col gap-3 self-end">
-            {contactLinks.map((link) => (
-              <a className="contact-link" href={link.href} key={link.label}>
-                {link.label}
-              </a>
-            ))}
-          </div>
-        ) : null}
+        <div className="flex flex-col gap-3 self-end">
+          <a className="contact-link" href="mailto:liamlawler333@gmail.com">
+            Email Liam
+          </a>
+          <a
+            className="text-sm text-white/58 transition hover:text-emerald"
+            href="mailto:liamlawler333@gmail.com"
+          >
+            liamlawler333@gmail.com
+          </a>
+        </div>
       </div>
     </footer>
   );

@@ -5,7 +5,6 @@ import {
   ContactSection,
   EducationSection,
   ExperienceSection,
-  GallerySection,
   HeroSection,
   ProjectsSection,
   ResumeSection,
@@ -18,11 +17,10 @@ export default function Home() {
       <HeroSection />
       <AboutSection />
       <EducationSection />
-      <ExperienceSection />
       <ProjectsSection />
       <AwardsSection />
+      <ExperienceSection />
       <SkillsSection />
-      <GallerySection />
       <ClientsSection />
       <ResumeSection />
       <ContactSection />

@@ -6,6 +6,17 @@ export type SocialLink = {
   thumbnailObjectPosition?: string;
 };
 
+export type ExperienceItem = {
+  title: string;
+  organization: string;
+  period: string;
+  bullets: string[];
+  link?: {
+    label: string;
+    href: string;
+  };
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -83,39 +94,37 @@ export const education = [
   }
 ];
 
-export const experience = [
+export const experience: ExperienceItem[] = [
   {
     title: "Production Assistant / Videographer",
     organization: "AMP Production Company",
-    period: "June 2026 - Present",
+    period: "June 2026-Present",
     bullets: [
-      "Captured event coverage for a Wonderland-themed Pride event in New Hope, Pennsylvania, including a live performance by Kim Petras.",
-      "Operated a Sony FX6 to film live performances, event highlights, and behind-the-scenes footage.",
-      "Currently editing footage for promotional and documentary use.",
-      "Provided original footage to a documentary team for inclusion in an upcoming film about the event."
-    ]
+      "Captured live performances, event highlights, and behind-the-scenes footage for the Alice in Wonderland Pride Party using a Sony FX6. Edited promotional footage and contributed original material to a documentary production team."
+    ],
+    link: {
+      label: "View Wonderland Coverage",
+      href: "/projects/wonderland-event-coverage"
+    }
   },
   {
     title: "Social Media Intern",
     organization: "SUNY Purchase Admissions",
-    period: "January 20, 2026 - May 15, 2026",
+    period: "January-May 2026",
     bullets: [
-      "Created short-form video content for Instagram and TikTok promoting student life and admissions.",
-      "Filmed and edited content using CapCut and Canva.",
-      "Scheduled posts and reviewed content performance analytics.",
-      "Collaborated with the admissions team on digital marketing and audience engagement."
-    ]
+      "Produced short-form Instagram and TikTok content promoting student life and admissions. Supported filming, editing, content scheduling, campaign planning, and performance analysis."
+    ],
+    link: {
+      label: "View Admissions Campaign",
+      href: "/projects/social-media-internship"
+    }
   },
   {
     title: "Film Festival Coordinator",
     organization: "SUNY Purchase",
-    period: "2025 - 2026",
+    period: "2025-2026",
     bullets: [
-      "Organized the Film Minor Showcase in 2025 and 2026 and directed the December 2025 Queer Film Fest.",
-      "Created submission forms, promotional posters, social media content, screening programs, and film schedules.",
-      "Selected screening order and managed projection-booth playback during live events.",
-      "Led outreach efforts, coordinated volunteers, gave opening remarks, and managed event logistics.",
-      "Produced a podcast documenting the promotional and organizational process behind the Queer Film Fest."
+      "Produced and coordinated campus film showcases and the December 2025 Queer Film Fest, managing submissions, promotion, screening programs, projection, volunteers, and live-event logistics."
     ]
   }
 ];
